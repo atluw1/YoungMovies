@@ -1,0 +1,109 @@
+<template>
+    <!-- <v-app> -->
+      <!-- dialog 설정(modal 비슷한거) -->
+      <v-dialog
+        dark
+        fullscreen
+      >
+        <!-- 화면에 표시되는 버튼 부분 -->
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            x-large
+            color="pink"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-movie-search-outline</v-icon>
+          </v-btn>
+        </template>
+        <!-- 버튼 누르면 뜨는 부분 -->
+        <template v-slot:default="dialog"> <!-- 얘를 설정 안 해주면 아래 닫기 버튼이 눌리지 않는다.-->
+          <!-- v-card 설정을 해 주면 v-sheet와 같이 들어간다. background 설정을 inline으로 해 준 이유는 우선순위를 위해서이다 -->
+          <!-- v-card는 버튼 누르면 뜨는 부분의 전체 부분을 의미한다 grid system을 이용하기 위해 중앙으로 몰아준다. -->
+          <v-card class="d-flex flex-column justify-content-center align-content-center" style="background-color: rgba(26, 26, 26, 0.9); border-color: rgba(26, 26, 26, 0.9);">
+          <!-- 부트스트랩을 위한 그리드 시스템 준비 -->
+            <div class="container">
+              <div class="row d-flex align-items-center">
+                <!-- 입력창과 버튼 -->
+                <!-- 작을 때는 화면 중앙 정렬 -->
+                <div class="col-12 d-flex flex-column align-items-center justify-content-center col-xl-6" style="height: 50px;">
+                    <v-text-field v-model="searchText" @keyup="searchMovie" style="margin: 0px;" autofocus clearable color="blue" class="search_input" label="영화 제목을 입력하세요">
+                    </v-text-field>
+                    <v-card-actions class="">
+                      <v-btn @click="dialog.value = false"><strong>닫기</strong></v-btn>
+                    </v-card-actions>
+                </div>
+                <!-- 영화들이 표시되는 부분 -->
+                <div class="col-12 col-xl-6 my-5">
+                  <!-- 안 되는 부분-->
+                    <div v-if="movieList === []" class="row">
+                      <h1>검색된 영화가 없습니다</h1>
+                    </div>
+                    <div v-else class="row">
+                      <MovieItem v-for="movie in movieList" :key="movie.id" :movie="movie" />
+                    </div>
+                </div>
+              </div>
+            </div>
+          </v-card>
+        </template>
+      </v-dialog>
+    <!-- </v-app> -->
+</template>
+
+<script>
+import MovieItem from './MovieItem.vue';
+import axios from 'axios'
+
+export default {
+  name: 'SearchButton',
+  components: {
+    MovieItem
+  },
+  // 아래 부분은 dialog 설정을 위해 필요하다
+  data: () => {
+    return {
+        dialog: false,
+        searchText: '',
+        movieList: [],
+    }
+  },
+  methods: {
+    searchMovie: function () {
+      if (this.searchText !== '') {
+        const tempList = []
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=ac824af39d5e13e1310acc5a598278ab&language=ko-KR&query=${this.searchText}&page=1&include_adult=false`)
+        .then(res => {
+          res.data.results.forEach(({ title, id, poster_path }) => {
+            if (tempList.length > 11) {
+              return
+            }
+            tempList.push({title, id, poster_path})
+          })
+        }
+        )
+        this.movieList = tempList
+      }
+    },
+
+  }
+}
+
+</script>
+
+<style scope>
+
+.search_card {
+  width: 80vw;
+  /* height: 80vh; */
+}
+
+.button {
+  font-weight: bold;
+}
+
+.search_input {
+  width: 80%;
+}
+</style>
