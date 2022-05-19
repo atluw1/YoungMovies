@@ -35,7 +35,7 @@
                     </v-card-actions>
                 </div>
                 <!-- 영화들이 표시되는 부분 -->
-                <div class="col-12 col-xl-6 my-5">
+                <div class="col-12 col-xl-6 my-3">
                   <!-- 안 되는 부분-->
                     <div v-if="movieList === []" class="row">
                       <h1>검색된 영화가 없습니다</h1>

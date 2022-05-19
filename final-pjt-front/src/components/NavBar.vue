@@ -3,21 +3,32 @@
     
     <!-- navbar 왼쪽 -->
     <div class="nav_column">
-      <div class="column_in_column">logo</div>
-      <div class="column_in_column">logo</div>
-      <div class="column_in_column">logo</div>
+        <div class="column_in_column">
+          <router-link class="router_anchor" :to="{ name: 'LoginView' }">
+            Login
+          </router-link>
+        </div>
+      <div class="column_in_column">
+          <router-link class="router_anchor" :to="{ name: 'SignupView' }">
+            Signup
+          </router-link>        
+      </div>
+      <div class="column_in_column"></div>
     </div>
 
     <!-- navbar 중간 -->
     <div class="nav_column d-flex justify-content-center position-relative">
-      <div class="position-fixed logo_div">
-        <img class="logo" src="https://w7.pngwing.com/pngs/346/26/png-transparent-cockatoo-logo-tempalte-miscellaneous-white-leaf.png" alt="임시 로고">
+      <div>
+        <!-- <img class="logo" src="@/images/temp_logo.png" alt="임시 로고"> -->
+        <router-link :to="{ name: 'HomeView' }">
+          <h1>YoungMovies</h1>
+        </router-link>
       </div>
     </div>
 
     <!-- navbar의 오른쪽 -->
     <div class="nav_column">
-      <!-- 첫 번째 버튼 구역 -->
+      <!-- 첫 번째 버튼 구역 => 영화 검색 --> 
       <div class="column_in_column">
         <SearchButton />
       </div>
@@ -27,8 +38,9 @@
           icon
           x-large
           color="pink"
+          @click="moveToHome"
           >
-          <v-icon>mdi-movie-search-outline</v-icon>
+            <v-icon >mdi-movie-search-outline</v-icon>
         </v-btn>
       </div>
       <!-- 세 번째 버튼 구역 -->
@@ -37,6 +49,7 @@
           icon
           x-large
           color="pink"
+          @click="moveToAbout"
           >
           <v-icon>mdi-movie-search-outline</v-icon>
         </v-btn>
@@ -52,27 +65,46 @@ export default {
   name: 'NavBar',
   components: {
     SearchButton
+  },
+  methods:{
+    moveToHome: function () {
+      this.$router.push({ name: 'HomeView' })
+    },
+    moveToAbout: function () {
+    this.$router.push({ name: 'LoginPage' })
+    }
   }
 }
 </script>
 
 <style scope>
-  .padding {
-    background-color: black;
-    height: 3rem;
+
+  h1 {
+    line-height: 100%;
+    margin-bottom: 0;
   }
+
+  a {
+    text-decoration: none;
+    color: pink
+  }
+
   .navbar {
     /* 네비게이션 바 자체의 색을 조절 */
     background-color: rgba(0, 0, 0, 0.8);
-    height: 5rem;
-    width: 90vw;
+    /* background-color: rgb(34, 46, 62, 0.8); */
+
+    height: 7rem;
+    width: 70vw;
+    border-radius: 3px;
   } 
 
   /* 로고가 들어가는 블록 */
   .logo_div {
     /* position은 fixed로 해 주었기 때문에 width를 전체 화면 넓이 기준으로 잡아 준다 */
-    width: 10%;
-    top: -5%
+    width: 20%;
+    height: 20%;
+    top: 0%
   }
 
   /* 로고 자체의 속성 */
@@ -92,4 +124,8 @@ export default {
     display: flex;
     justify-content: center;
   }
+
+  .router_anchor {
+  color: #E91E48;
+}
 </style>
