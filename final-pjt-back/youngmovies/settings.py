@@ -153,6 +153,7 @@ AUTH_USER_MODEL = "accounts.User"
 # CORS_ALLOWED_ORIGINS = [
 # 'http://localhost:8080/'
 # ]
+
 CORS_ALLOW_ALL_ORIGIN = True
 
 SITE_ID = 1
@@ -164,6 +165,6 @@ REST_FRAMEWORK = {
 
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ]
 }
