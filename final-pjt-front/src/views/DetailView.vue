@@ -1,35 +1,32 @@
 <template>
   <div>
     DetailView
-    <!-- {{ movieId }} -->
-    <!-- <img :src="" alt=""> -->
+    {{ movieId }}
+
+
+
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'DetailView',
   props: {
     movieId: {
-      type: Number
+      type: [Number, String]
     }
   },
   data: function () {
     return {
-      apiKey: this.$store.state.apiKey,
-      url: `https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.apiKey}&language=ko-KR`
+
     }
   },
-  created () {
-    axios.get(`${this.url}`)
-    .then(res =>{
-      console.log(res)
-    })
-  },
-
-  
+  computed: {
+    apiKey: function () { return this.$store.state.apiKey },
+    url: function () { return `https://api.themoviedb.org/3/movie/${this.movieID}?api_key=${this.apiKey}&language=ko-KR` }
+  }
 }
 
 </script>

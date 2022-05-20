@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -7,6 +8,7 @@ export default new Vuex.Store({
   state: {
     trendingMovies: [],
     apiKey: 'ac824af39d5e13e1310acc5a598278ab',
+    suggestedMovies: [],
 
   },
   getters: {
@@ -22,5 +24,9 @@ export default new Vuex.Store({
     },    
   },
   modules: {
-  }
+  },
+  plugins: [
+    createPersistedState(),
+  ]
+
 })
