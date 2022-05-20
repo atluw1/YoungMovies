@@ -6,11 +6,11 @@
         <nav class="navarea">
           <NavBar />
         </nav>
-        <main class="d-flex justify-content-center">
-          <div class="main_area">
-            <router-view/>
-          </div>
-        </main>
+          <main class="d-flex justify-content-center">
+            <div class="main_area">
+              <router-view/>
+            </div>
+          </main>
       </div>
     </v-app>
   </div>
@@ -26,7 +26,8 @@ export default {
   data: 
     function () {
       return {
-        backgroundStyle : ''
+        backgroundStyle : '',
+        
       }
     
   },
@@ -34,7 +35,8 @@ export default {
     NavBar,
   },
   created() {
-    axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=ac824af39d5e13e1310acc5a598278ab')
+    const apiKey = this.$store.state.apiKey
+    axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}&language=ko-KR&include_image_language=kr`)
     .then((res) => {
       
       // 흥행 중 영화들의 poster_path를 리스트에 저장하여 state에 올린 뒤, mainpage에서 carousel로 돌림
@@ -44,7 +46,7 @@ export default {
       });
       this.$store.dispatch('create_trending_movies', tempTrendingArray)
 
-
+      // 배경 화면 부분
       const pictureNumber = _.sample(_.range(0, 20))
       const backImageUrl = res.data.results[pictureNumber].backdrop_path
       this.backgroundStyle = `height: 100vh; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 60%, rgb(0, 0, 0, 1)),url('https://image.tmdb.org/t/p/original${backImageUrl}'); background-repeat: no-repeat, no-repeat; background-size: cover; background-position: center;`
