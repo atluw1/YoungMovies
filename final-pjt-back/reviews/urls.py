@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'reviews'
+
 urlpatterns = [
     # 전체 리뷰 리스트 조회
     path('reviews/', views.review_list),
