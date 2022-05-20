@@ -1,22 +1,26 @@
 <template>
-    <div class="carousel_div">
-      <v-carousel
-      :reverse='true'
-      hide-delimiters
-      :cycle='true'
-      interval="6000"
-      :show-arrows-on-hover='true'
+  <div class="carousel_div animated-box in">
+      <!-- v-carousel을 이용할 때 내부 이미지 비율을 유지하는 방법 => height='auto' -->
+    <v-carousel
+    :reverse='true'
+    hide-delimiters
+    :cycle='true'
+    interval="6000"
+    :show-arrows-on-hover='true'
+    height="auto"
+    >
+      <!-- 아래 부분은 router 쓸 때 계속 참고할 부분일 것이다. -->
+      <v-carousel-item
+        v-for="(item, i) in movies"
+        :key="i"
+        :src="Url + item.poster_path"
+        :to="{ name: 'DetailView', params: { movieId: item.id } }"
+        style="height: auto; width: 100%;"  
       >
-        <!-- 아래 부분은 router 쓸 때 계속 참고할 부분일 것이다. -->
-        <v-carousel-item
-          v-for="(item, i) in movies"
-          :key="i"
-          :src="Url + item.poster_path"
-          :to="{ name: 'DetailView', params: { movieId: item.id } }"
-        >
-        </v-carousel-item>
-      </v-carousel>
-    </div>
+
+      </v-carousel-item>
+    </v-carousel>
+  </div>
 </template>
 
 <script>
@@ -45,12 +49,108 @@ export default {
 
 </script>
 
+
+
 <style>
 .carousel_div {
   width: 80%;
   height: auto;
-  padding: 10px;
-  background-color: black;
+  /* padding: 10px; */
+  /* background-color: black; */
 }
+
+/* The animation starts here */
+.animated-box {
+  position: relative;
+}
+
+.animated-box:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 4px;
+  background: linear-gradient(120deg, #00F260, #0575E6, #00F260);
+  background-size: 300% 300%;
+  clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+
+.animated-box.in:after {
+  animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite;
+}
+
+/* motion */
+@keyframes gradient-animation {
+  0% {
+    background-position: 15% 0%;
+  }
+  50% {
+    background-position: 85% 100%;
+  }
+  100% {
+    background-position: 15% 0%;
+  }
+}
+
+@keyframes frame-enter {
+  0% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+  25% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+  50% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, 100% 0%, 0% 0%);
+  }
+  75% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 0%, 0% 0%);
+  }
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 0% 100%);
+  }
+}
+
+/* 여기서부터 무지개 */
+
+.rainbow {
+  position: relative;
+  margin: 300px auto 0;
+  width: 500px;
+  height: 250px;
+  background: linear-gradient(0deg, #000, #272727);
+}
+
+.rainbow:before, .rainbow:after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+    #0000ff, #00ff00,#ffff00, #ff0000);
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: steam 20s linear infinite;
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.rainbow:after {
+  filter: blur(50px);
+}
+
 
 </style>
