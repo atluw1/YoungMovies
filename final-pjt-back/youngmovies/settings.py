@@ -36,11 +36,22 @@ INSTALLED_APPS = [
     'accounts',
     'reviews',
     
-    #third-party-apps
+    # third-party-apps
     'django_seed',
+    'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     
-    #django-app
+    # DRF auth 담당
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+    # django allauth
+    'allauth',
+    'allauth.account',
+
+    # django-app
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +61,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -136,3 +148,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "accounts.User"
+
+# 나중에 변경할 것!
+# CORS_ALLOWED_ORIGINS = [
+# 'http://localhost:8080/'
+# ]
+CORS_ALLOW_ALL_ORIGIN = True
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
