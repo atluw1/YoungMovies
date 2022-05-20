@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    trendingMovies: []
+    trendingMovies: [],
+    apiKey: 'ac824af39d5e13e1310acc5a598278ab',
+
   },
   getters: {
   },
@@ -17,8 +19,7 @@ export default new Vuex.Store({
   actions: {
     create_trending_movies : function ({ commit }, movies) {
       commit('CREATE_TRENDING_MOVIES', movies)
-      
-    }
+    },    
   },
   modules: {
   }

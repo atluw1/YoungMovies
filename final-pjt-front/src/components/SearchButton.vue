@@ -36,7 +36,6 @@
                 </div>
                 <!-- 영화들이 표시되는 부분 -->
                 <div class="col-12 col-xl-6 my-3">
-                  <!-- 안 되는 부분-->
                     <div v-if="movieList === []" class="row">
                       <h1>검색된 영화가 없습니다</h1>
                     </div>
@@ -73,7 +72,8 @@ export default {
     searchMovie: function () {
       if (this.searchText !== '') {
         const tempList = []
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=ac824af39d5e13e1310acc5a598278ab&language=ko-KR&query=${this.searchText}&page=1&include_adult=false`)
+        const apiKey = this.$store.state.apiKey
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=ko-KR&query=${this.searchText}&page=1&include_adult=false`)
         .then(res => {
           res.data.results.forEach(({ title, id, poster_path }) => {
             if (tempList.length > 11) {
