@@ -16,7 +16,8 @@
         <span class="genres"> {{ movieDetail.runtime }}분</span>
         <br><br>
         <h4>{{ movieDetail.vote_average }}</h4>
-        <span class="tagline fw-bold">"{{ movieDetail.tagline }}"</span>
+        <!-- tagline이 있을 때만 보여주기 -->
+        <span v-if="movieDetail.tagline" class="tagline fw-bold">"{{ movieDetail.tagline }}"</span>
         <div>
           <h3>개요</h3>
           <p id="overview">{{ movieDetail.overview }}</p>
