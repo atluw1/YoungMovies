@@ -9,21 +9,23 @@
       </v-card>
     </v-hover>
   </div> -->
-  <div v-if="movie.poster_path" class="col-6 col-md-3 p-1 movie-poster-wrap">
-    <img 
-      :src="posterUrl"
-      alt="poster" 
-      class="movie-poster"
-    >
-    <div class="movie-title m-1">
-      <p class="movie-title-text">
-        {{ movie.title }}
-      </p>
+    <div v-if="movie.poster_path" class="col-6 col-md-3 p-1 movie-poster-wrap">
+      <img 
+        :src="posterUrl"
+        alt="poster" 
+        class="movie-poster"
+      >
+      <div class="movie-title m-1">
+        <p class="movie-title-text">
+          {{ movie.title }}
+        </p>
+      </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
+
 export default {
   name: 'MovieItem',
   props: {
@@ -34,9 +36,9 @@ export default {
       posterUrl : `https://image.tmdb.org/t/p/w154/${this.movie.poster_path}`}  
   },
   method:{
-
+    }
   }
-}
+
 </script>
 
 <style scope>
