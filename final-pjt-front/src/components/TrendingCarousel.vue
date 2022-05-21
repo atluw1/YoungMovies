@@ -47,8 +47,7 @@ export default {
 }
 
 
-</script>
-
+</script >
 
 
 <style>
@@ -113,44 +112,6 @@ export default {
 }
 
 /* 여기서부터 무지개 */
-
-.rainbow {
-  position: relative;
-  margin: 300px auto 0;
-  width: 500px;
-  height: 250px;
-  background: linear-gradient(0deg, #000, #272727);
-}
-
-.rainbow:before, .rainbow:after {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: -2px;
-  background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
-    #0000ff, #00ff00,#ffff00, #ff0000);
-  background-size: 400%;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  z-index: -1;
-  animation: steam 20s linear infinite;
-}
-
-@keyframes steam {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-.rainbow:after {
-  filter: blur(50px);
-}
 
 
 </style>

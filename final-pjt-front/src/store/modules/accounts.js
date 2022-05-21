@@ -26,6 +26,7 @@ export default {
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
     SET_PROFILE: (state, profile) => state.profile = profile,
     SET_AUTH_ERROR: (state, error) => state.authError = error,
+    SET_AUTH_ERROR_NULL: (state) => state.authError = null,
   },
   actions: {
     saveToken ( { commit }, token) {
@@ -38,8 +39,26 @@ export default {
       // state.token 삭제, localStorage에 token 추가
       commit('SET_TOKEN', '')
       localStorage.setItem('token', '')
-
     },
+    
+    set_auth_error_null ({commit}) {
+      commit('SET_AUTH_ERROR_NULL')
+    },
+
+    signup({ commit, dispatch }, credentials) {
+      axios({
+        url: drf.accounts.signup(),
+        method: 'post',
+        data: credentials,
+      }).then(res => {
+        const token = res.data.key
+        dispatch('saveToken', token)
+        router.push({ name: 'HomeView' })
+      }).catch(err => {
+        console.error(err)
+        commit('SET_AUTH_ERROR', err.response.data)
+      })
+    }
   },
 
 }

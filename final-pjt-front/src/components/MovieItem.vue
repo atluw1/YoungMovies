@@ -9,7 +9,7 @@
       </v-card>
     </v-hover>
   </div> -->
-  <div v-if="movie.poster_path" class="col-3 p-1 movie-poster-wrap">
+  <div v-if="movie.poster_path" class="col-6 col-md-3 p-1 movie-poster-wrap">
     <img 
       :src="posterUrl"
       alt="poster" 

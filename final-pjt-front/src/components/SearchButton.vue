@@ -24,22 +24,22 @@
           <v-card class="d-flex flex-column justify-content-center align-content-center" style="background-color: rgba(26, 26, 26, 0.9); border-color: rgba(26, 26, 26, 0.9);">
           <!-- 부트스트랩을 위한 그리드 시스템 준비 -->
             <div class="container">
+              <!-- 바른 레이아웃을 위한 완충 블록 -->
+              <div class="d-block d-md-none overpad"></div>
               <div class="row d-flex align-items-center">
                 <!-- 입력창과 버튼 -->
                 <!-- 작을 때는 화면 중앙 정렬 -->
-                <div class="col-12 d-flex flex-column align-items-center justify-content-center col-xl-6" style="height: 50px;">
+                <div class="col-12 col-lg-6 d-flex flex-column align-items-center justify-content-center " style="height: 50px;">
                     <v-text-field v-model="searchText" @keyup="searchMovie" style="margin: 0px;" autofocus clearable color="blue" class="search_input" label="영화 제목을 입력하세요">
                     </v-text-field>
                     <v-card-actions class="">
                       <v-btn @click="dialog.value = false"><strong>닫기</strong></v-btn>
                     </v-card-actions>
                 </div>
+                <div class="d-block d-md-none underpad"></div>
                 <!-- 영화들이 표시되는 부분 -->
-                <div class="col-12 col-xl-6 my-3">
-                    <div v-if="movieList === []" class="row">
-                      <h1>검색된 영화가 없습니다</h1>
-                    </div>
-                    <div v-else class="row">
+                <div class="col-12 col-lg-6 my-3">
+                    <div class="row">
                       <MovieItem v-for="movie in movieList" :key="movie.id" :movie="movie" />
                     </div>
                 </div>
@@ -92,7 +92,7 @@ export default {
 
 </script>
 
-<style scope>
+<style scoped>
 
 .search_card {
   width: 80vw;
@@ -106,4 +106,13 @@ export default {
 .search_input {
   width: 80%;
 }
+
+.overpad {
+  height: 200px;
+}
+
+.underpad {
+  height: 100px;
+}
+
 </style>

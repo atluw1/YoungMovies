@@ -77,7 +77,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
   h1 {
     line-height: 100%;
