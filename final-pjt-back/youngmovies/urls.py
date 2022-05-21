@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
     path('api/v1/', include('movies.urls')),
+    # accounts 관련 회원가입, 로그인 등의 기능들은, dj_rest_auth 등을 이용하여 구현하기 때문에, 우리가 url을 지정해 줄 필요가 없다.
     path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/accounts/', include('dj_rest_auth.urls')),
+    path('api/v1/accounts/signup/', include('dj_rest_auth.registration.urls')),
+
     path('api/v1/reviews/', include('reviews.urls')),
 ]

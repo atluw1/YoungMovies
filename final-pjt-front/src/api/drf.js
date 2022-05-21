@@ -1,11 +1,11 @@
-const HOST = 'http://localhost:8000/api/v1/'
+const HOST = 'http://127.0.0.1:8000/api/v1/'
 
 const ACCOUNTS = 'accounts/'
 const ARTICLES = 'articles/'
 const COMMENTS = 'comments/'
 
 export default {
-  // accounts: {
+  accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
     logout: () => HOST + ACCOUNTS + 'logout/',
     signup: () => HOST + ACCOUNTS + 'signup/',
@@ -13,7 +13,7 @@ export default {
     currentUserInfo: () => HOST + ACCOUNTS + 'user/',
     // username으로 프로필 제공
     mypage: username => HOST + ACCOUNTS + username + 'mypage/',
-  // },
+  },
   // articles: {
   //   articles: () => HOST + ARTICLES,
   //   article: articlePk => HOST + ARTICLES + `${articlePk}/`,

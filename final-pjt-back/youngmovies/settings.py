@@ -154,7 +154,7 @@ AUTH_USER_MODEL = "accounts.User"
 # 'http://localhost:8080/'
 # ]
 
-CORS_ALLOW_ALL_ORIGIN = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 SITE_ID = 1
 

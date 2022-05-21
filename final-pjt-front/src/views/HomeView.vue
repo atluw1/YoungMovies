@@ -8,11 +8,11 @@
         </div>
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
           <h1 class="mb-3">추천 영화</h1>          
-          <!-- <TrendingCarousel/> -->
+          <TrendingCarousel/>
         </div>
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
           <h1 class="mb-3">최신 리뷰</h1>
-          <!-- <TrendingCarousel/> -->
+          <TrendingCarousel/>
         </div>
       </div>
     </div>

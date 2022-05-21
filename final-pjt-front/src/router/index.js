@@ -37,7 +37,7 @@ const routes = [
     component: LogoutView,
   },
   {
-    path: ':username/mypage',
+    path: '/:username/mypage',
     name: 'MyPageView',
     component: MyPageView,
   },
@@ -113,7 +113,7 @@ router.beforeEach((to, from, next) => {
       console.log('로그인 안됨')
       next({ name: 'LoginView'})
     } else {
-      console.log('니가 로그인이 되어 있거나, 로그인이 필요한 url로 이동함')
+      // console.log('니가 로그인이 되어 있거나, 로그인이 필요한 url로 이동함')
       next()
     }
 })
