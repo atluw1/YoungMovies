@@ -72,7 +72,8 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
 .poster {
   margin: 2rem;
 }
@@ -84,6 +85,7 @@ export default {
 }
 
 .detail {
+  /* color: white; */
   margin: 2rem;
 }
 
