@@ -1,7 +1,5 @@
 <template>
-  <v-for>
-
-  </v-for>
+  
 </template>
 
 <script>
@@ -14,20 +12,8 @@ export default {
   name: 'ReviewList',
   data: () => {
     return {
-      reviewList: []
+      review: {}
     }
-  },
-  mounted() {
-    axios({
-      method: 'GET',
-      url: reviewUrl
-    })
-      .then(res => {
-        this.reviewList = res.data
-      })
-      .catch(res => {
-        console.log('불러오는 데 실패했습니다.', res)
-      })
   },
   methods: {
   }
