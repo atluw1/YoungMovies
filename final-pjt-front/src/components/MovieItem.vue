@@ -10,8 +10,9 @@
     </v-hover>
   </div> -->
   <div
+    v-show="IsPoster"
     class="col-6 col-md-3 p-1"
-    @click="moveToDetail">
+    @click="closeDialogMoveToDetail">
   <div
   class="movie-poster-wrap">
     <img 
@@ -36,11 +37,18 @@ export default {
   },
   data: function () {
     return {
-      posterUrl : `https://image.tmdb.org/t/p/w154/${this.movie.poster_path}`}  
+      posterUrl : `https://image.tmdb.org/t/p/w154/${this.movie.poster_path}`,
+      IsPoster: this.movie.poster_path
+    }
   },
   methods:{
-    moveToDetail() { this.$router.push({ name: 'DetailView', params: { movieId: this.movie.id } })}
-  }
+    // 검색창 초기화 & dialog 닫는 신호 보내기
+    closeDialogMoveToDetail: function () {
+      this.$emit('close-dialog')
+      this.$router.push({ name: 'DetailView', params: { movieId: this.movie.id } })
+    },
+},
+
 }
 </script>
 

@@ -8,7 +8,8 @@
         </nav>
           <main class="d-flex justify-content-center">
             <div class="main_area">
-              <router-view/>
+              <!-- :key="$route.fullPath" 도 된다 이거 안 붙여주면 router path가 바뀌어도 갱신이 안 된다 -->
+              <router-view :key="$route.path"/>
             </div>
           </main>
       </div>

@@ -65,8 +65,12 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["login"])
-    },
+        ...mapActions(["login", "set_auth_error_null"])
+          },
+    created() {
+      // created 안에 mapActions를 선언하는 것은 불가능하다 => methods 안에 선언 후 실행해 주어야 한다.
+      this.set_auth_error_null()
+    }
     // localstorage에 자동으로 저장하는 라이브러리 때문인지, 초기화가 되지 않는다. => 페이지를 로드할 때 null로 만들어 주자
 
 }

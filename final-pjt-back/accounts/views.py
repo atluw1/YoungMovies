@@ -8,7 +8,12 @@ from django.contrib.auth import get_user_model
 from datetime import date
 from django.utils import timezone
 from django.db.models import Q
+from .serializers import MyPageSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
+
+User = get_user_model()
 
 @require_http_methods(["POST", "GET"])
 def signup(request):
@@ -73,23 +78,8 @@ def logout(request):
     return redirect('plans:index')
 
 
+@api_view(['GET'])
 def my_page(request, username):
-    User = get_user_model()
-    person = get_object_or_404(User, username=username)
-    today = date.today()
-    nowtime = timezone.now()
-    coming_plans = person.join_plans.filter(date__gte=today, time__gte=nowtime).order_by('date', 'time')
-    passed_plans = person.join_plans.filter(Q(date__lt=today) |Q(date=today, time__lt=nowtime)).order_by('date')
-
-    today_plans = coming_plans.filter(date = today)
-    first_plan = ''
-    if today_plans:
-        first_plan = today_plans[0]
-    context = {
-        'person': person,
-        'coming_plans': coming_plans,
-        'passed_plans': passed_plans,
-        'today_plans': today_plans,
-        'first_plan': first_plan,
-    }
-    return render(request, 'accounts/my_page.html', context)
+    user = get_object_or_404(User, username=username)
+    serializer = MyPageSerializer(user)
+    return Response(serializer.data)

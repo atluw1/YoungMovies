@@ -7,7 +7,7 @@
     :cycle='true'
     interval="6000"
     :show-arrows-on-hover='true'
-    height="auto"
+    height="500"
     >
       <!-- 아래 부분은 router 쓸 때 계속 참고할 부분일 것이다. -->
       <v-carousel-item

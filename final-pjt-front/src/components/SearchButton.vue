@@ -2,6 +2,7 @@
     <!-- <v-app> -->
       <!-- dialog 설정(modal 비슷한거) -->
       <v-dialog
+        click:outside="true"
         dark
         fullscreen
       >
@@ -26,6 +27,7 @@
             <div class="container">
               <!-- 바른 레이아웃을 위한 완충 블록 -->
               <div class="d-block d-md-none overpad"></div>
+
               <div class="row d-flex align-items-center">
                 <!-- 입력창과 버튼 -->
                 <!-- 작을 때는 화면 중앙 정렬 -->
@@ -36,11 +38,13 @@
                       <v-btn @click="dialog.value = false"><strong>닫기</strong></v-btn>
                     </v-card-actions>
                 </div>
+
                 <div class="d-block d-md-none underpad"></div>
                 <!-- 영화들이 표시되는 부분 -->
                 <div class="col-12 col-lg-6 my-3">
                     <div class="row">
-                      <MovieItem v-for="movie in movieList" :key="movie.id" :movie="movie" />
+                      <!-- 왜인지는 모르겠다. -->
+                      <MovieItem @close-dialog="dialog.value = false; refreshText();" v-for="movie in movieList" :key="movie.id" :movie="movie" />
                     </div>
                 </div>
               </div>
@@ -63,12 +67,16 @@ export default {
   // 아래 부분은 dialog 설정을 위해 필요하다
   data: () => {
     return {
-        dialog: false,
-        searchText: '',
-        movieList: [],
+      dialog : false,
+      searchText: '',
+      movieList: [],  
     }
   },
   methods: {
+    // closeDialog: function () {
+    //   this.dialog.value = false
+    // },
+
     searchMovie: function () {
       if (this.searchText !== '') {
         const tempList = []
@@ -86,6 +94,10 @@ export default {
         this.movieList = tempList
       }
     },
+    refreshText () {
+      this.searchText = ''
+      this.movieList = []
+    }
 
   }
 }

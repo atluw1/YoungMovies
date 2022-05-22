@@ -11,7 +11,16 @@ import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import NotFound404 from '../views/NotFound404.vue'
 
+import getters from '@/store/modules/accounts.js'
 
+function removeQueryParams(to) {
+  if (Object.keys(to.query).length)
+    return { path: to.path, query: {}, hash: to.hash }
+}
+
+function removeHash(to) {
+  if (to.hash) return { path: to.path, query: to.query, hash: '' }
+}
 
 Vue.use(VueRouter)
 
@@ -41,9 +50,6 @@ const routes = [
     name: 'MyPageView',
     component: MyPageView,
   },
-
-
-  
   // 홈페이지 관련 route
   {
     path: '/',
@@ -54,21 +60,13 @@ const routes = [
     path: '/detail/:movieId',
     name: 'DetailView',
     component: DetailView,
-    // params로 넘겨주는 props가 일반적인 문자열이면 그대로 넘겨주어도 상관 없지만
-    // 만약 props가 숫자인 경우, url은 문자열인데 받을 때는 Number로 받아도 문제가 되고, String으로 받아주어도 문제가 된다
-    // 따라서, 받은 props를 숫자로 파싱해 줄 필요가 있다.
-
-    // props: (route) => {
-      //   const userId = Number.parseInt(route.params.userId, 10)
-      //   if (Number.isNaN(userId)) {
-        //     return 0
-    //   }
-    //   return { userId }
-    // }
-    
-    // 아니면 그냥, 받아줄 때 타입을 [String, Number] 두 가지로 만들어 준다.
     props: true,
+    beforeRouteUpdate (to, from) {
+      // just use `this`
+      this.movieId = to.params.name
+    }
   },
+
   {
     path: '/404',
     name: 'NotFound404',
@@ -97,9 +95,10 @@ router.beforeEach((to, from, next) => {
   // to: 이동할 url 정보가 담긴 라우터 객체
   // from: 현재 url 정보가 담긴 라우터 객체
   // next: to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
-
   // 로그인 여부 확인(실제로는 vuex에서 불러옵니다)
-  const isLoggedIn = true
+
+  const isLoggedIn = getters.isLoggedIn
+  console.log(isLoggedIn)
 
   // 로그인이 필요한 페이지
   // [] 안에 들어가는 이름은 위쪽 routes의 name!

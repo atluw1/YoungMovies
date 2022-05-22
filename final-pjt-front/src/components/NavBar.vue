@@ -13,7 +13,11 @@
             Signup
           </router-link>        
       </div>
-      <div class="column_in_column"></div>
+      <div class="column_in_column">
+          <router-link class="router_anchor" :to="{ name: 'LogoutView' }">
+            Logout
+          </router-link>       
+      </div>
     </div>
 
     <!-- navbar 중간 -->
@@ -45,14 +49,9 @@
       </div>
       <!-- 세 번째 버튼 구역 -->
       <div class="column_in_column">
-        <v-btn
-          icon
-          x-large
-          color="pink"
-          @click="moveToAbout"
-          >
-          <v-icon>mdi-movie-search-outline</v-icon>
-        </v-btn>
+          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
+            MyPage
+          </router-link> 
       </div>
     </div>
   </div>
@@ -60,6 +59,7 @@
 
 <script>
 import SearchButton from "./SearchButton.vue"
+import { mapGetters } from "vuex"
 
 export default {
   name: 'NavBar',
@@ -71,8 +71,11 @@ export default {
       this.$router.push({ name: 'HomeView' })
     },
     moveToAbout: function () {
-    this.$router.push({ name: 'LoginPage' })
+      this.$router.push({ name: 'LoginPage' })
     }
+  },
+  computed: {
+    ...mapGetters(['currentUser'])
   }
 }
 </script>

@@ -26,8 +26,12 @@ export default {
     SET_TOKEN: (state, token) => state.token = token,
     SET_CURRENT_USER: (state, user) => state.currentUser = user,
     SET_PROFILE: (state, profile) => state.profile = profile,
-
     SET_AUTH_ERROR: (state, error) => state.authError = error,
+
+    // 이 함수가 없으면, my page로 들어갔을 때 이전에 로그인 했던 사용자의 mypage로 넘어가는 문제가 생긴다.
+    SET_CURRENT_USER_NULL: (state) => 
+      {state.currentUser = {}
+        console.log(state.currentUser)},
 
     // localstorage를 자동 state에 저장하는 라이브러리 사용 시 초기화가 되지 않는 문제 때문에 사용
     SET_AUTH_ERROR_NULL: (state) => state.authError = null,
@@ -42,6 +46,7 @@ export default {
     removeToken ( { commit } ) {
       // state.token 삭제, localStorage에 token 추가
       commit('SET_TOKEN', '')
+      commit('SET_CURRENT_USER_NULL')
       localStorage.setItem('token', '')
     },
     
@@ -65,7 +70,18 @@ export default {
       })
     },
     logout({ getters, dispatch }) {
-      
+      axios({
+      url: drf.accounts.logout(),
+      method: 'post',
+      headers: getters.authHeader
+      }).then(() => {
+        dispatch('removeToken')
+        alert('성공적으로 로그아웃 되었습니다')
+        router.push({ name: 'HomeView' })
+      }).catch(err => {
+        console.error('무슨 짓을 한 겁니까?')
+        
+      })
     },
 
     signup({ commit, dispatch }, credentials) {
@@ -103,7 +119,17 @@ export default {
           }
         })
       }
-    }
+    },
+    fetchMyPage ({ commit, getters }, { username }) {
+      axios({
+        url: drf.accounts.mypage(username),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SET_PROFILE', res.data)
+        })
+    },
 
   },
 
