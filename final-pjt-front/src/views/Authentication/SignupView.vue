@@ -18,16 +18,6 @@
             required
             autofocus
           ></v-text-field>
-          <!-- 닉네임 -->
-          <v-text-field
-            dark
-            color="blue"
-            v-model="credentials.nickname"
-            :rules="nickNameRules"
-            :counter="10"
-            label="닉네임"
-            required
-          ></v-text-field>
           <!-- 비밀번호 1 -->
           <v-text-field
             color="green"
@@ -80,15 +70,10 @@ export default {
             password2Rules: [
                 v => !!v || "비밀번호 확인을 입력해 주세요!",
             ],
-            nickNameRules: [
-                v => !!v || "닉네임을 입력해 주세요!",
-                v => v.length <= 10 || "닉네임은 10글자 이하여야 합니다!",
-            ],
             credentials: {
                 username: "",
                 password1: "",
                 password2: "",
-                nickname: "",
                 valid: false,
             }
         };

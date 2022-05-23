@@ -4,4 +4,4 @@ from django.conf import settings
 # Create your models here.
 
 class User(AbstractUser):
-    nickname = models.CharField(max_length=10)
+    pass

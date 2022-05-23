@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import store from '../store'
+import store from '../store'
 
 import LoginView from '../views/Authentication/LoginView.vue'
 import LogoutView from '../views/Authentication/LogoutView.vue'
@@ -13,7 +13,6 @@ import ReviewView from '../views/ReviewView.vue'
 import ReviewDetail from '../views/ReviewDetail.vue'
 import NotFound404 from '../views/NotFound404.vue'
 
-import getters from '@/store/modules/accounts.js'
 
 function removeQueryParams(to) {
   if (Object.keys(to.query).length)
@@ -109,7 +108,7 @@ router.beforeEach((to, from, next) => {
   // next: to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
   // 로그인 여부 확인(실제로는 vuex에서 불러옵니다)
 
-  const isLoggedIn = getters.isLoggedIn
+  const { isLoggedIn } = store.getters
   console.log(isLoggedIn)
 
   // 로그인이 필요한 페이지

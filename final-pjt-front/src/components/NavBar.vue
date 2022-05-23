@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar d-flex justify-content-evenly">
+  <div class="navbar d-flex justify-content-md-between justify-content-center">
     
     <!-- navbar 왼쪽 -->
     <div class="nav_column">
@@ -14,6 +14,11 @@
           </router-link>        
       </div>
       <div class="column_in_column">
+          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
+            Hello, {{ currentUser.nickname }}
+          </router-link> 
+      </div>  
+      <div class="column_in_column">
           <router-link class="router_anchor" :to="{ name: 'LogoutView' }">
             Logout
           </router-link>       
@@ -21,7 +26,7 @@
     </div>
 
     <!-- navbar 중간 -->
-    <div class="nav_column d-flex justify-content-center position-relative">
+    <div class="d-none nav_column d-md-flex justify-content-center position-relative">
       <div>
         <!-- <img class="logo" src="@/images/temp_logo.png" alt="임시 로고"> -->
         <router-link :to="{ name: 'HomeView' }">
@@ -75,7 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'isLoggedIn'])
   }
 }
 </script>
@@ -118,7 +123,7 @@ export default {
   }
 
   .nav_column {
-    width: 33%;
+    width: 25%;
     display: flex;
     justify-content: space-evenly;
   }

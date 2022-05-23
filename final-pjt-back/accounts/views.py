@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import CustomUserCreationForm
 from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout

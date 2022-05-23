@@ -130,7 +130,6 @@ export default {
           commit('SET_PROFILE', res.data)
         })
     },
-
   },
 
 }
