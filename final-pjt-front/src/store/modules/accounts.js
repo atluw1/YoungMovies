@@ -7,6 +7,7 @@ export default {
   // state는 직접 접근하지 않겠다!
   state: {
     token: '',
+    // currentUser에 유저 정보들이 담겨 있음
     currentUser: {},
     profile: {},
     authError: null,

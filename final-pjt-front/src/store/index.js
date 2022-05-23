@@ -15,6 +15,7 @@ export default new Vuex.Store({
 
   },
   getters: {
+    getApiKey:  state => state.apiKey
   },
   mutations: {
     CREATE_TRENDING_MOVIES: function (state, movies) {
