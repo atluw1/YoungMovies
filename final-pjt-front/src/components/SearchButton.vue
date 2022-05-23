@@ -35,7 +35,7 @@
                     <v-text-field v-model="searchText" @keyup="searchMovie" style="margin: 0px;" autofocus clearable color="blue" class="search_input" label="영화 제목을 입력하세요">
                     </v-text-field>
                     <v-card-actions class="">
-                      <v-btn @click="dialog.value = false"><strong>닫기</strong></v-btn>
+                      <v-btn @click="dialog.value = false; refreshText();"><strong>닫기</strong></v-btn>
                     </v-card-actions>
                 </div>
 
