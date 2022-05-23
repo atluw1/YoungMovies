@@ -10,6 +10,7 @@ import MyPageView from '../views/Authentication/MyPageView.vue'
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import ReviewView from '../views/ReviewView.vue'
+import ReviewDetail from '../views/ReviewDetail.vue'
 import NotFound404 from '../views/NotFound404.vue'
 
 import getters from '@/store/modules/accounts.js'
@@ -61,6 +62,11 @@ const routes = [
     path: '/reviews',
     name: 'ReviewView',
     component: ReviewView,
+  },
+  {
+    path: '/review/:review_pk',
+    name: 'ReviewDetail',
+    component: ReviewDetail,
   },
   {
     path: '/detail/:movieId',
