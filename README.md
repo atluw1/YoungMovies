@@ -30,6 +30,12 @@
 - 영화 추천 쿼리 날리기
   - 사용자가 조건을 정해서 영화를 추천 받는 페이지에서의 쿼리 날리기
   - 이 부분은 https://developers.themoviedb.org/3/discover/movie-discover 이 페이지에서 참고
+  - api key
+    - language = ko-KR 고정
+    - include adult => boolean
+    - with_genres
+
+
 
 
 

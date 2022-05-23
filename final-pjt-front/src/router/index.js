@@ -7,12 +7,15 @@ import LogoutView from '../views/Authentication/LogoutView.vue'
 import SignupView from '../views/Authentication/SignupView.vue'
 import MyPageView from '../views/Authentication/MyPageView.vue'
 
+
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import ReviewView from '../views/ReviewView.vue'
 import ReviewDetail from '../views/ReviewDetail.vue'
 import NotFound404 from '../views/NotFound404.vue'
 
+import SuggestQueryView from '../views/MovieSuggestion/SuggestQueryView.vue'
+import SuggestedMoviesView from '../views/MovieSuggestion/SuggestedMoviesView.vue'
 
 function removeQueryParams(to) {
   if (Object.keys(to.query).length)
@@ -72,11 +75,20 @@ const routes = [
     name: 'DetailView',
     component: DetailView,
     props: true,
-    beforeRouteUpdate (to, from) {
-      // just use `this`
-      this.movieId = to.params.name
-    }
+    // beforeRouteUpdate (to, from) {
+    //   // just use `this`
+    //   this.movieId = to.params.name
+    // }
   },
+
+  // 영화 추천 라우터
+  {
+    path: '/suggest',
+    name: 'SuggestQueryView',
+    component: SuggestQueryView,
+  },
+
+  // 
 
   {
     path: '/404',

@@ -43,14 +43,9 @@
       </div>
       <!-- 두 번째 버튼 구역 -->
       <div class="column_in_column">
-        <v-btn
-          icon
-          x-large
-          color="pink"
-          @click="moveToHome"
-          >
-            <v-icon >mdi-movie-search-outline</v-icon>
-        </v-btn>
+          <router-link class="router_anchor" :to="{ name: 'SuggestQueryView' }">
+            영화추천
+          </router-link> 
       </div>
       <!-- 세 번째 버튼 구역 -->
       <div class="column_in_column">
