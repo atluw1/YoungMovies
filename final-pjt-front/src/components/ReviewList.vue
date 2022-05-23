@@ -10,12 +10,17 @@ let reviewUrl = "http://127.0.0.1:8000/api/v1/reviews/"
 
 export default {
   name: 'ReviewList',
-  data: () => {
+  props: {
+    review: Object
+  },
+  data: function() {
     return {
-      review: {}
     }
   },
   methods: {
+    toReviewDetail: function() {
+      this.$router.push({ name: 'DetailView', params: { movieId: this.movie.id } })
+    }
   }
 }
 </script>
