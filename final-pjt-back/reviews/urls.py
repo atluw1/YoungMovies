@@ -10,7 +10,7 @@ urlpatterns = [
     # # 특정 영화 리뷰 리스트 조회
     # path('reviews/<int:movie_pk>/', views.review_of_movie),
 
-    # # 리뷰 수정, 조회, 삭제
+    # 리뷰 수정, 조회, 삭제
     # path('reviews/<int:review_pk>/', views.review_detail),
     # # 리뷰 생성
     # path('movies/<int:movie_pk>/reviews/', views.create_review),
