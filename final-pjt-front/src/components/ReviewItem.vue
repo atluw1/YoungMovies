@@ -1,18 +1,19 @@
 <template>
   <div>
-    <p>번호 제목 작성자 작성일</p>
+    <p>{{ idx + 1 }} {{ review.title }} {{ review.user.username }} {{ review.created_at }}</p>
   </div>
 </template>
 
 <script>
 
 // django 리뷰 주소
-let reviewUrl = "http://127.0.0.1:8000/api/v1/reviews/"
+// let reviewUrl = "http://127.0.0.1:8000/api/v1/reviews/"
 
 export default {
-  name: 'ReviewList',
+  name: 'ReviewItem',
   props: {
-    review: Object
+    review: Object,
+    idx: Number
   },
   data: function() {
     return {
