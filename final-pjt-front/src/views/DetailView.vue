@@ -26,6 +26,7 @@
     </div>
     <div>
       <h1>리뷰</h1>
+      <ReviewItem v-for="(review, idx) in reviews" :key="review.pk" :review="review" :idx='idx'/>
     </div>
   </div>
 </template>
@@ -43,6 +44,7 @@ export default {
   data: function () {
     return {
       movieDetail: {},
+      reviews: []
       }
   },
   computed: {
@@ -59,17 +61,24 @@ export default {
       }
       return movieGenres
     },
+    reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' }
   },
   created() {
     axios.get(this.url)
     .then((res) => {
-      console.log(res.data)
       this.movieDetail = res.data
     })
+    axios.get(this.reviewUrl)
+    .then((res) => {
+      res.data.forEach(element => {
+        if ( element.movie == this.movieId ) {
+          this.reviews.push(element)
+          console.log(this.reviews)
+        }
+      });
+    })
   }
-  }
-
-
+}
 </script>
 
 <style scoped>
