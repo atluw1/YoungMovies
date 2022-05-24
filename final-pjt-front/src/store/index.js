@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import accounts from './modules/accounts'
+import review from './modules/review'
 
 Vue.use(Vuex)
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
   },
   modules: {
     accounts,
+    review,
   },
   plugins: [
     createPersistedState(),
