@@ -51,10 +51,12 @@ export default {
       const pictureNumber = _.sample(_.range(0, 20))
       const backImageUrl = res.data.results[pictureNumber].backdrop_path
       this.backgroundStyle = `height: 100vh; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 60%, rgb(0, 0, 0, 1)),url('https://image.tmdb.org/t/p/original${backImageUrl}'); background-repeat: no-repeat, no-repeat; background-size: cover; background-position: center;`      
-    })
+    }).then(() => {
     axios.get('http://127.0.0.1:8000/api/v1/score_carousel/')
     .then((res) =>{
-      console.log(res.data)
+      this.$store.dispatch('create_review_movies', res.data)
+      // print(this.$state.store.reviewMovies)
+    })
     })
 }}
 </script>

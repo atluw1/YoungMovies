@@ -9,18 +9,19 @@ from django.db.models import Avg
 @api_view(['GET'])
 def score_carousel(request):
     score = Movie_score.objects.values('movie').annotate(Avg('score')).order_by('-score__avg')
-    movie_set = {}
     if len(score) < 10:
         length = len(score)
     else:
         length = 10
+    movie_list = []
     for i in range(length):
+        movie_set = {}
         movie = get_object_or_404(Movie, pk=score[i]['movie'])
         movie_set['tmdb_id'] = movie.tmdb_id
         movie_set['title'] = movie.title
         movie_set['poster_path'] = movie.poster_path
-    print(movie_set)
-    return Response(movie_set)
+        movie_list.append(movie_set)
+    return Response(movie_list)
 
 
 

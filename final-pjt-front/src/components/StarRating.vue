@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'StarRating',
   props: {
-    movieId: String
+    movieId: [String, Number]
   },
   data: function() {
     return {
