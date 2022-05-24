@@ -33,9 +33,17 @@ def create_or_change_score(request):
 
 @api_view(['POST'])
 def initial_score(request):
+    User = request.user
     Data = request.data
     movie = get_object_or_404(Movie, tmdb_id=Data['movie_id'])
+    if movie.evaluating_users.filter(pk=User.pk).exists():
+        isScoreExist = True
+    else:
+        isScoreExist = False
+    # print(movie.evaluating_users.all())
     score = Movie_score.objects.filter(movie=movie).aggregate(Avg('score'))
-    averageScore = {'averageScore': round(score['score__avg'], 2)}
-    print(averageScore)
+    averageScore = {
+        'averageScore': round(score['score__avg'], 2),
+        'isScoreExist': isScoreExist
+        }
     return Response(averageScore)
