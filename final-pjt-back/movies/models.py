@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Movie(models.Model):
@@ -16,4 +16,7 @@ class Movie_score(models.Model):
     # 본 모델로 인해 생성된 테이블에 유저와 영화의 pk를 저장한다.
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    score = models.IntegerField()
+    score = models.IntegerField(validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])

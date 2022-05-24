@@ -9,7 +9,6 @@
         <!-- <div v-for="(genre, idx) in genres" :key="{idx}">
           <span class="d-flex flex-wrap">{{ genre }}</span>
         </div> -->
-        {{ movieTitle }}
         <br>
         <h4 id="original">{{ movieDetail.original_title }}</h4>
         <span class="genres">{{ movieDetail.release_date }} /</span>
@@ -26,8 +25,10 @@
       </div>
     </div>
     <div>
+      <h3><StarRating :movieId="movieId" /></h3>
+      
       <h1>리뷰</h1>
-      <ReviewItem v-for="(review, idx) in reviews" :key="review.pk" :review="review" :idx='idx'/>
+      <!-- <ReviewItem v-for="(review, idx) in reviews" :key="review.pk" :review="review" :idx='idx'/> -->
     </div>
   </div>
 </template>
@@ -35,9 +36,13 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import StarRating from '@/components/StarRating.vue'
 
 export default {
   name: 'DetailView',
+  components: {
+    StarRating
+  },
   props: {
     movieId: {
       type: [Number, String]
@@ -56,6 +61,7 @@ export default {
   computed: {
     apiKey: function () { return this.$store.state.apiKey },
     url: function () { return `https://api.themoviedb.org/3/movie/${this.movieId}?api_key=${this.apiKey}&language=ko-KR` },
+    ...mapGetters(['getToken', 'authHeader'])
     // posterUrl() { return `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}` },
     // year: function () {return this.movieDetail.release_date.slice(0, 4)},
     // genres() {
@@ -65,9 +71,9 @@ export default {
     //   }}
     //   return movieGenres
     // reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' },
-    // ...mapGetters(['getToken', 'authHeader'])
   },
   methods: {
+    // created가 computed나 data보다 나중에 실행되어서, 위의 정보들을 가지고 created에 넣어서 axios 신호를 보내려 하면 뻑이 난다.
     getMovieDetail: function () {
       axios.get(this.url)
       .then((res) => {
