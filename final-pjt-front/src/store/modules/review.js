@@ -137,7 +137,7 @@ export default {
         })
           .then(() => {
             commit('SET_REVIEW', {})
-            router.push({ name: 'reviews' })
+            router.push({ name: 'ReviewListView' })
           })
           .catch(err => console.error(err.response))
       }

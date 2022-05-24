@@ -47,6 +47,11 @@
             영화추천
           </router-link> 
       </div>
+      <div class="column_in_column">
+          <router-link class="router_anchor" :to="{ name: 'ReviewListView' }">
+            게시판
+          </router-link> 
+      </div>
       <!-- 세 번째 버튼 구역 -->
       <div class="column_in_column">
           <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
