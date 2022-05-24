@@ -10,8 +10,12 @@ import MyPageView from '../views/Authentication/MyPageView.vue'
 
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
-import ReviewView from '../views/ReviewView.vue'
-import ReviewDetail from '../views/ReviewDetail.vue'
+
+import ReviewListView from '../views/ReviewListView.vue'
+import ReviewDetailView from '../views/ReviewDetailView.vue'
+import ReviewCreateView from '../views/ReviewCreateView.vue'
+import ReviewEditView from '../views/ReviewEditView.vue'
+
 import NotFound404 from '../views/NotFound404.vue'
 
 import SuggestQueryView from '../views/MovieSuggestion/SuggestQueryView.vue'
@@ -62,13 +66,24 @@ const routes = [
   },
   {
     path: '/reviews',
-    name: 'ReviewView',
-    component: ReviewView,
+    name: 'ReviewListView',
+    component: ReviewListView,
   },
   {
-    path: '/review/:review_pk',
+    path: '/reviews/new/',
+    name: 'ReviewCreate',
+    component: ReviewCreateView,
+    props: true
+  },
+  {
+    path: '/reviews/:review_pk',
     name: 'ReviewDetail',
-    component: ReviewDetail,
+    component: ReviewDetailView,
+  },
+  {
+    path: '/reviews/:review_pk/edit',
+    name: 'ReviewEdit',
+    component: ReviewEditView,
   },
   {
     path: '/detail/:movieId',
