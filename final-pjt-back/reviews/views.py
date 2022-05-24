@@ -16,8 +16,9 @@ def review_list_or_create(request):
 
     def review_list():
         # comment 개수 추가
-        # reviews = Review.objects.annotate(comment_count=Count('comments', distinct=True)),
-        reviews = Review.objects.all()
+        reviews = Review.objects.annotate(comment_count=Count('comments', distinct=True),
+            like_count=Count('like_users', distinct=True)
+        ).order_by('-pk')
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
     
@@ -30,6 +31,7 @@ def review_list_or_create(request):
     if request.method == 'GET':
         return review_list()
     elif request.method == 'POST':
+        print(request.data)
         return create_review()
 
 
@@ -61,6 +63,19 @@ def review_detail_or_update_or_delete(request, review_pk):
     elif request.method == 'DELETE':
         if request.user == review.user:
             return delete_review()
+
+@api_view(['POST'])
+def like_review(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    user = request.user
+    if review.like_users.filter(pk=user.pk).exists():
+        review.like_users.remove(user)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+    else:
+        review.like_users.add(user)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
 
 @api_view(['POST'])
 def create_comment(request, review_pk):
