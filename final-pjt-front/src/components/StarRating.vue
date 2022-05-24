@@ -1,10 +1,23 @@
 <template>
   <div>
-    영무비 평점: <span>{{ score }}</span> <v-btn @click.prevent="removeScore" v-show="isScored">취소<v-icon>mdi-cached</v-icon></v-btn>
+    <!-- Text 기반 평점 => 일단 냅두자 => 뻑날까봐 무셔워 -->
+    <!-- 영무비 평점: <span>{{ score }}</span> <v-btn @click.prevent="removeScore" v-show="isScored">취소<v-icon>mdi-cached</v-icon></v-btn>
     <form v-show="!isScored">
       점수 입력: <input v-model="scoreText" type="text">
       <button @click.prevent="sendStar">보내기</button>
-    </form>
+    </form> -->
+    <!-- 별표 기반 평점 -->
+    영무비 평점: <span>{{ score }}</span> <v-btn @click.prevent="removeScore" v-show="isScored">취소<v-icon>mdi-cached</v-icon></v-btn>
+    <form v-show="!isScored">
+      <!-- 점수 입력: <input v-model="scoreText" type="text"> -->
+      <v-rating
+      v-model="scoreText"
+      background-color="purple lighten-3"
+      color="purple"
+      large
+      ></v-rating>
+      <button @click.prevent="sendStar">보내기</button>
+    </form>    
   </div>
 </template>
 
@@ -21,7 +34,7 @@ export default {
   },
   data: function() {
     return {
-      scoreText: '',
+      scoreText: 0,
       score: '0',
       isScored: false,
     }
