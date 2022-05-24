@@ -9,6 +9,7 @@
         <!-- <div v-for="(genre, idx) in genres" :key="{idx}">
           <span class="d-flex flex-wrap">{{ genre }}</span>
         </div> -->
+        {{ movieTitle }}
         <br>
         <h4 id="original">{{ movieDetail.original_title }}</h4>
         <span class="genres">{{ movieDetail.release_date }} /</span>
@@ -45,38 +46,58 @@ export default {
   data: function () {
     return {
       movieDetail: {},
-      reviews: []
+      reviews: [],
+      movieTitle: '',
+      posterUrl: '',
+      year: '',
+      genres: ''
       }
   },
   computed: {
     apiKey: function () { return this.$store.state.apiKey },
     url: function () { return `https://api.themoviedb.org/3/movie/${this.movieId}?api_key=${this.apiKey}&language=ko-KR` },
-    posterUrl() { return `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}` },
-    year: function () {return this.movieDetail.release_date.slice(0, 4)},
-    genres() {
-      // var movieGenres = []
-      var movieGenres = ''
+    // posterUrl() { return `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}` },
+    // year: function () {return this.movieDetail.release_date.slice(0, 4)},
+    // genres() {
+    //   var movieGenres = ''
+    //   for (const i in this.movieDetail.genres) {
+    //     movieGenres += `${this.movieDetail.genres[i]['name']}` 
+    //   }}
+    //   return movieGenres
+    // reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' },
+    // ...mapGetters(['getToken', 'authHeader'])
+  },
+  methods: {
+    getMovieDetail: function () {
+      axios.get(this.url)
+      .then((res) => {
+        this.movieDetail = res.data
+      }).then((res) => {
+      this.movieTitle = this.movieDetail.title
+      this.posterUrl = `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}`
+      this.year = this.movieDetail.release_date.slice(0, 4)
+      let movieGenres = ''
       for (const i in this.movieDetail.genres) {
-        // movieGenres.push(this.movieDetail.genres[i]['name'])
-        movieGenres += `${this.movieDetail.genres[i]['name']} ` 
+        movieGenres += `${this.movieDetail.genres[i]['name']}` 
       }
-      return movieGenres
+      this.genres = movieGenres})
+      .then((res) =>{
+      axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/create/',
+      headers: this.authHeader,
+      data: {
+        title: this.movieTitle,
+        poster_path: this.posterUrl,
+        tmdb_id: this.movieId
+      }})
+
+      })
     },
-    reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' },
-    ...mapGetters(['getToken'])
   },
   created() {
-    axios.get(this.url)
-    .then((res) => {
-        this.movieDetail = res.data
-    })
-
-    // .catch(() => {
-    //   console.log('fail')
-    // })
-    // console.log(movieDetail)
-
-    // console.log(abc())
+    this.getMovieDetail()
+    // this.saveOnDB()
     // axios.get(this.reviewUrl)
     // .then((res) => {
     //   res.data.forEach(element => {
@@ -88,18 +109,8 @@ export default {
     // })
 
     // DB에 영화 정보 요청 보냄
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/v1/create/',
-      headers: {Authorization: `Token ${this.getToken}`},
-      data: {
-        title: this.movieDetail.title,
-        poster_path: this.movieDetail.poster_path,
-        tmdb_id: this.movieId
-      }}).then(() => {
-        })
-    }
-}
+
+  }}
 </script>
 
 <style scoped>
