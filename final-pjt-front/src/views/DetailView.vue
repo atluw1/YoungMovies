@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'DetailView',
@@ -51,7 +52,7 @@ export default {
     apiKey: function () { return this.$store.state.apiKey },
     url: function () { return `https://api.themoviedb.org/3/movie/${this.movieId}?api_key=${this.apiKey}&language=ko-KR` },
     posterUrl() { return `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}` },
-    year() { return this.movieDetail.release_date.slice(0, 4)},
+    year: function () {return this.movieDetail.release_date.slice(0, 4)},
     genres() {
       // var movieGenres = []
       var movieGenres = ''
@@ -61,23 +62,43 @@ export default {
       }
       return movieGenres
     },
-    reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' }
+    reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' },
+    ...mapGetters(['getToken'])
   },
   created() {
     axios.get(this.url)
     .then((res) => {
-      this.movieDetail = res.data
+        this.movieDetail = res.data
     })
-    axios.get(this.reviewUrl)
-    .then((res) => {
-      res.data.forEach(element => {
-        if ( element.movie == this.movieId ) {
-          this.reviews.push(element)
-          console.log(this.reviews)
-        }
-      });
-    })
-  }
+
+    // .catch(() => {
+    //   console.log('fail')
+    // })
+    // console.log(movieDetail)
+
+    // console.log(abc())
+    // axios.get(this.reviewUrl)
+    // .then((res) => {
+    //   res.data.forEach(element => {
+    //     if ( element.movie == this.movieId ) {
+    //       this.reviews.push(element)
+    //       console.log(this.reviews)
+    //     }
+    //   });
+    // })
+
+    // DB에 영화 정보 요청 보냄
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/create/',
+      headers: {Authorization: `Token ${this.getToken}`},
+      data: {
+        title: this.movieDetail.title,
+        poster_path: this.movieDetail.poster_path,
+        tmdb_id: this.movieId
+      }}).then(() => {
+        })
+    }
 }
 </script>
 

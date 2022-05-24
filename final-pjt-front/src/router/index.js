@@ -121,7 +121,6 @@ router.beforeEach((to, from, next) => {
   // 로그인 여부 확인(실제로는 vuex에서 불러옵니다)
 
   const { isLoggedIn } = store.getters
-  console.log(isLoggedIn)
 
   // 로그인이 필요한 페이지
   // [] 안에 들어가는 이름은 위쪽 routes의 name!
