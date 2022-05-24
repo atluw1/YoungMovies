@@ -1,7 +1,7 @@
 const HOST = 'http://127.0.0.1:8000/api/v1/'
 
 const ACCOUNTS = 'accounts/'
-const ARTICLES = 'articles/'
+const REVIEWS = 'reviews/'
 const COMMENTS = 'comments/'
 
 export default {
@@ -14,12 +14,12 @@ export default {
     // username으로 프로필 제공
     mypage: username => HOST + ACCOUNTS + `${username}/` + 'mypage/',
   },
-  // articles: {
-  //   articles: () => HOST + ARTICLES,
-  //   article: articlePk => HOST + ARTICLES + `${articlePk}/`,
-  //   likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
-  //   comments: articlePk => HOST + ARTICLES + `${articlePk}/` + COMMENTS,
-  //   comment: (articlePk, commentPk) =>
-  //     HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
-  // },
+  reviews: {
+    reviews: () => HOST + REVIEWS,
+    review: review_pk => HOST + REVIEWS + `${review_pk}/`,
+    likeReview: review_pk => HOST + REVIEWS + `${review_pk}/` + 'like/',
+    comments: review_pk => HOST + REVIEWS + `${review_pk}/` + COMMENTS,
+    comment: (review_pk, comment_pk) =>
+      HOST +REVIEWS + `${review_pk}/` + COMMENTS + `${comment_pk}/`,
+  },
 }

@@ -28,14 +28,14 @@
       <h3><StarRating :movieId="movieId" /></h3>
       
       <h1>리뷰</h1>
-      <!-- <ReviewItem v-for="(review, idx) in reviews" :key="review.pk" :review="review" :idx='idx'/> -->
+      <button @click="MoveToCreate">리뷰 작성</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import StarRating from '@/components/StarRating.vue'
 
 export default {
@@ -62,17 +62,12 @@ export default {
     apiKey: function () { return this.$store.state.apiKey },
     url: function () { return `https://api.themoviedb.org/3/movie/${this.movieId}?api_key=${this.apiKey}&language=ko-KR` },
     ...mapGetters(['getToken', 'authHeader'])
-    // posterUrl() { return `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}` },
-    // year: function () {return this.movieDetail.release_date.slice(0, 4)},
-    // genres() {
-    //   var movieGenres = ''
-    //   for (const i in this.movieDetail.genres) {
-    //     movieGenres += `${this.movieDetail.genres[i]['name']}` 
-    //   }}
-    //   return movieGenres
-    // reviewUrl: function () { return 'http://127.0.0.1:8000/api/v1/reviews/' },
   },
   methods: {
+    // 리뷰작성으로 넘어가기
+    MoveToCreate: function () {
+      this.$router.push({ name: 'ReviewCreate', params: { movieId: this.movieId, } })
+    },
     // created가 computed나 data보다 나중에 실행되어서, 위의 정보들을 가지고 created에 넣어서 axios 신호를 보내려 하면 뻑이 난다.
     getMovieDetail: function () {
       axios.get(this.url)
@@ -103,20 +98,8 @@ export default {
   },
   created() {
     this.getMovieDetail()
-    // this.saveOnDB()
-    // axios.get(this.reviewUrl)
-    // .then((res) => {
-    //   res.data.forEach(element => {
-    //     if ( element.movie == this.movieId ) {
-    //       this.reviews.push(element)
-    //       console.log(this.reviews)
-    //     }
-    //   });
-    // })
-
-    // DB에 영화 정보 요청 보냄
-
-  }}
+  }
+  }
 </script>
 
 <style scoped>
