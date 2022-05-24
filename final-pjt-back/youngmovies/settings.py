@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'reviews',
     
     # third-party-apps
+    'django_extensions',
     'django_seed',
     'corsheaders',
     'rest_framework',

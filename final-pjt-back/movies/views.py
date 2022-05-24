@@ -5,6 +5,25 @@ from .models import Movie, Movie_score
 from .serializers import MovieSerializer, ScoreSerializer
 from django.db.models import Avg
 
+
+@api_view(['GET'])
+def score_carousel(request):
+    score = Movie_score.objects.values('movie').annotate(Avg('score')).order_by('-score__avg')
+    movie_set = {}
+    if len(score) < 10:
+        length = len(score)
+    else:
+        length = 10
+    for i in range(length):
+        movie = get_object_or_404(Movie, pk=score[i]['movie'])
+        movie_set['tmdb_id'] = movie.tmdb_id
+        movie_set['title'] = movie.title
+        movie_set['poster_path'] = movie.poster_path
+    print(movie_set)
+    return Response(movie_set)
+
+
+
 @api_view(['POST'])
 def create_movie(request):
     Data = request.data
@@ -14,6 +33,7 @@ def create_movie(request):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(request.data)
+
 
 @api_view(['POST'])
 def create_or_change_score(request):

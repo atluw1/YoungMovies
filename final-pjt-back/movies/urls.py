@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.create_movie),
     path('score/', views.create_or_change_score),
     path('score/init/', views.initial_score),
+    path('score_carousel/', views.score_carousel),
 ]

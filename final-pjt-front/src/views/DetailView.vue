@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex wrap">
       <div class="poster">
-        <img :src="posterUrl" alt="poster">
+        <img class="poster_size" :src="posterUrl" alt="poster">
       </div>
       <div class="detail">
         <span id="title">{{ movieDetail.title }}</span> <span id="year"> ({{ year }})</span>
@@ -75,7 +75,7 @@ export default {
         this.movieDetail = res.data
       }).then((res) => {
       this.movieTitle = this.movieDetail.title
-      this.posterUrl = `https://image.tmdb.org/t/p/w300/${this.movieDetail.poster_path}`
+      this.posterUrl = `https://image.tmdb.org/t/p/original${this.movieDetail.poster_path}`
       this.year = this.movieDetail.release_date.slice(0, 4)
       let movieGenres = ''
       for (const i in this.movieDetail.genres) {
@@ -106,6 +106,12 @@ export default {
 
 .poster {
   margin: 2rem;
+}
+
+
+.poster_size {
+  width: 300px;
+  height: auto;
 }
 
 #original, .tagline {
