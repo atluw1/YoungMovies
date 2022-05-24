@@ -13,7 +13,6 @@ from .serializers.comment import CommentSerializer
 
 @api_view(['GET', 'POST'])
 def review_list_or_create(request):
-
     def review_list():
         # comment 개수 추가
         reviews = Review.objects.annotate(comment_count=Count('comments', distinct=True),

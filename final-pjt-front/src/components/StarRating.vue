@@ -1,14 +1,14 @@
 <template>
   <div>
-    영무비 평점: {{ score }}
-    <form @click.prevent="sendStar">
+    영무비 평점: <span>{{ score }}</span> <v-btn @click.prevent="removeScore" v-show="isScored">취소<v-icon>mdi-cached</v-icon></v-btn>
+    <form v-show="!isScored">
       점수 입력: <input v-model="scoreText" type="text">
-      <button>보내기</button>
+      <button @click.prevent="sendStar">보내기</button>
     </form>
-    {{ movieId }}
   </div>
 </template>
 
+    <!-- {{ movieId }} -->
 <script>
 
 import axios from 'axios'
@@ -17,18 +17,37 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'StarRating',
   props: {
-    movieId: Number
+    movieId: String
   },
   data: function() {
     return {
       scoreText: '',
-      score: ''
+      score: '0',
+      isScored: false,
     }
   },
   computed: {
     ...mapGetters(['authHeader'])
   },
   methods: {
+    initialize (arg) {
+      this.isScored = arg
+    },
+    removeScore () {
+      axios({
+        url: 'http://127.0.0.1:8000/api/v1/score/',
+        method: 'post',
+        data: { 
+          score: parseInt(this.scoreText, 10),
+          movie_id: parseInt(this.movieId, 10)
+          },
+        headers: this.authHeader
+      }).then(res => {
+        this.score = res.data.averageScore
+        this.isScored = false
+      })
+    },
+    // 평점 보내기
     sendStar: function () {
       axios({
         url: 'http://127.0.0.1:8000/api/v1/score/',
@@ -41,8 +60,11 @@ export default {
       })
       .then(res => {
         this.score = res.data.averageScore
+        this.isScored = true
+        // this.isOpened = !this.isOpened
       })
     },
+    // 페이지 열었을 때 평점 초기화
     initialScore: function () {
       axios({
         url: 'http://127.0.0.1:8000/api/v1/score/init/',
@@ -52,7 +74,10 @@ export default {
           movie_id: parseInt(this.movieId, 10)
         },
       }).then(res => {
+        console.log(res)
         this.score = res.data.averageScore
+        const arg = res.data.isScoreExist
+        this.initialize(arg)
       })
     }
   },
@@ -62,6 +87,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.scorearea {
+  width: 100px;
+}
 </style>

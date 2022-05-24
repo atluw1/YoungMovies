@@ -18,17 +18,33 @@ def create_movie(request):
 @api_view(['POST'])
 def create_or_change_score(request):
     User = request.user
+    # print(User.pk)
     Data = request.data
     movie = get_object_or_404(Movie, tmdb_id=Data['movie_id'])
 
     # 시리얼라이저에서 직접 입력받는 필드는 score밖에 없으므로, 잘 정해주어야 한다 
-    serializer = ScoreSerializer(data=Data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=User, movie=movie)
-        # 영화 스코어 평균
+    if movie.evaluating_users.filter(pk=User.pk).exists():
+        movie.evaluating_users.remove(User)
+        # serializer = ScoreSerializer(data=Data)
+        # if serializer.is_valid(raise_exception=True):
+            # serializer.save(user=User, movie=movie)
+            # print(serializer)
+            # 영화 스코어 평균
         score = Movie_score.objects.filter(movie=movie).aggregate(Avg('score'))
-        averageScore = {'averageScore': round(score['score__avg'], 2)}
-        print(averageScore)
+        if score['score__avg'] == None:
+            print(score)
+            averageScore = {'averageScore': 0}
+        else:
+            averageScore = {'averageScore': round(score['score__avg'], 2)}
+    else:
+        # 여기는 잘 됨
+        serializer = ScoreSerializer(data=Data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=User, movie=movie)
+            # 영화 스코어 평균
+            score = Movie_score.objects.filter(movie=movie).aggregate(Avg('score'))
+            averageScore = {'averageScore': round(score['score__avg'], 2)}
+            print(averageScore)
     return Response(averageScore)
 
 @api_view(['POST'])
@@ -36,14 +52,29 @@ def initial_score(request):
     User = request.user
     Data = request.data
     movie = get_object_or_404(Movie, tmdb_id=Data['movie_id'])
+    print(movie.evaluating_users.all())
+    # 만약 점수가 있다면
     if movie.evaluating_users.filter(pk=User.pk).exists():
         isScoreExist = True
     else:
         isScoreExist = False
     # print(movie.evaluating_users.all())
     score = Movie_score.objects.filter(movie=movie).aggregate(Avg('score'))
-    averageScore = {
-        'averageScore': round(score['score__avg'], 2),
-        'isScoreExist': isScoreExist
-        }
+    # print(isScoreExist)
+    if score['score__avg'] == None:
+        averageScore = {
+            'averageScore': 0,
+            'isScoreExist': False
+            }
+    else:
+        if isScoreExist:
+            averageScore = {
+                'averageScore': round(score['score__avg'], 2),
+                'isScoreExist': True
+                }
+        else:
+            averageScore = {
+                'averageScore': round(score['score__avg'], 2),
+                'isScoreExist': False
+                }
     return Response(averageScore)
