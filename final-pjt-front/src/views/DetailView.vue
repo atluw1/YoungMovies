@@ -26,9 +26,6 @@
     </div>
     <div>
       <h3><StarRating :movieId="movieId" /></h3>
-      
-      <h1>리뷰</h1>
-      <button @click="MoveToCreate">리뷰 작성</button>
     </div>
   </div>
 </template>

@@ -1,14 +1,20 @@
 <template>
-  <li class="comment-list-item">
+  <div class="comment-list-item">
     <router-link :to="{ name: 'MyPageView', params: { username: comment.user.username } }">
-      {{ comment.user.username }}
-    </router-link>: 
+      <div class="d-flex justify-content-between">
+        <div>
+          <i class="fa-solid fa-user"></i>
+          <span> {{ comment.user.username }}</span>
+        </div>      
+        <p>{{ comment.created_at }}</p>
+      </div>
+    </router-link>
     
     <span v-if="!isEditing">{{ payload.content }}</span>
 
     <span v-if="isEditing">
       <input type="text" v-model="payload.content">
-      <button @click="onUpdate">수정</button> |
+      <button @click="onUpdate">확인</button> |
       <button @click="switchIsEditing">취소</button>
     </span>
 
@@ -16,8 +22,7 @@
       <button @click="switchIsEditing">수정</button> |
       <button @click="deleteComment(payload)">삭제</button>
     </span>
-    <span>{{ comment.created_at }}</span>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -54,8 +59,4 @@ export default {
 </script>
 
 <style>
-.comment-list-item {
-  border: 1px solid green;
-
-}
 </style>
