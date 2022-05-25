@@ -15,6 +15,7 @@
       background-color="purple lighten-3"
       color="purple"
       large
+      half-increments
       ></v-rating>
       <button @click.prevent="sendStar">보내기</button>
     </form>    
@@ -66,7 +67,7 @@ export default {
         url: 'http://127.0.0.1:8000/api/v1/score/',
         method: 'post',
         data: { 
-          score: parseInt(this.scoreText, 10),
+          score: parseInt(this.scoreText, 10) * 2,
           movie_id: parseInt(this.movieId, 10)
           },
         headers: this.authHeader

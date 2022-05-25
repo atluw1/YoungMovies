@@ -17,6 +17,6 @@ class Movie_score(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     score = models.IntegerField(validators=[
-            MaxValueValidator(5),
+            MaxValueValidator(10),
             MinValueValidator(1)
         ])
