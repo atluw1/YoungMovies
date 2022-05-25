@@ -16,13 +16,14 @@
         <!-- 댓글: {{ review.comment_count }} | 좋아요: {{ review.like_count }}
       </li>
     </ul> -->
-    <div id="app">
-      <v-app id="inspire">
-        <v-card>
+    <!-- <div id="app"> -->
+      <!-- <v-app id="inspire"> -->
+        <v-card id="card">
           <v-card-title>
             자유게시판
             <v-spacer></v-spacer>
             <v-text-field
+              id="search"
               v-model="search"
               append-icon="mdi-magnify"
               label="검색"
@@ -31,6 +32,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
+            id="table"
             :headers="headers"
             :items="reviews"
             :search="search"
@@ -39,7 +41,8 @@
             hide-default-footer
             class="elevation-1"
             @page-count="pageCount = $event"
-            @click:row="handleClick"></v-data-table>
+            @click:row="handleClick"
+            style="cursor:pointer"></v-data-table>
           <div class="text-center pt-2">
             <v-pagination
               v-model="page"
@@ -48,14 +51,16 @@
               next-icon="mdi-menu-right"
               prev-icon="mdi-menu-left"></v-pagination>
           </div>
+          <button id='create-button' @click="toCreate">글쓰기</button>
         </v-card>
-      </v-app>
+      <!-- </v-app> -->
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import drf from '@/api/drf'
 
   export default {
     name: 'ReviewList',
@@ -67,12 +72,13 @@
         totalVisible: 10,
         search: '',
         headers: [
-          { text: '번호', align: 'center', sortable: false, value: 'pk' },
+          { text: 'No', align: 'center', sortable: false, value: 'pk' },
           { text: '제목', align: 'center', sortable: false, value: 'title' },
           { text: '작성자', align: 'center', sortable: false, value: 'user.username' },
           { text: '작성일', align: 'center', sortable: false, value: 'created_at' },
         ],
-        items: []
+        items: [],
+        url: drf.reviews.reviews
       }
     },
     computed: {
@@ -80,8 +86,12 @@
     },
     methods: {
       ...mapActions(['fetchReviews']),
-      // handleClick(value) {
-      //   this.detailReview(value);
+      handleClick(item) {
+        this.$router.push({ name: 'ReviewDetail', params: { review_pk: item.pk } });
+        },
+      toCreate() {
+        this.$router.push({ name: 'ReviewCreate' });
+      }
     },
     created() {
       this.fetchReviews()
@@ -89,6 +99,14 @@
   }
 </script>
 
-<style>
+<style scoped>
+/* #card {
+  background-color: rgba( 255, 255, 255, 0.3 );
+}
+
+#table {
+  background-color: rgba( 255, 255, 255, 0.8 );
+  color: royalblue;
+} */
 
 </style>

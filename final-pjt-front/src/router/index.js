@@ -79,6 +79,7 @@ const routes = [
     path: '/reviews/:review_pk',
     name: 'ReviewDetail',
     component: ReviewDetailView,
+    props: true
   },
   {
     path: '/reviews/:review_pk/edit',
