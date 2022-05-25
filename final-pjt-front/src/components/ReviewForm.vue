@@ -1,15 +1,41 @@
-<template>
+-<template>
   <form @submit.prevent="onSubmit">
-    <div>
-      <label for="title">제목: </label>
-      <input v-model="newReview.title" type="text" id="title" />
-    </div>
-    <div>
-      <label for="content">내용: </label>
-      <textarea v-model="newReview.content" type="text" id="content"></textarea>
-    </div>
-    <div>
-      <button>{{ action }}</button>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="w-50">
+        <v-text-field
+          dark
+          color="yellow"
+          v-model="newReview.title"
+          :rules="titleRules"
+          label="제목"
+          required
+          autofocus
+        ></v-text-field>
+      </div>
+
+      <div class="w-50">
+        <v-textarea
+          dark
+          clearable
+          clear-icon="mdi-close-circle"
+          :rules="contentRules"
+          color="yellow"
+          v-model="newReview.content"
+          label="내용"
+          required
+        ></v-textarea>
+      </div>
+      <div>
+        <div class="text-right">
+          <v-btn
+            id="btn"
+            color="success"
+            elevation="7"
+            class="mx-3 mb-3"
+            @click="onSubmit"
+          >{{ action }}</v-btn>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -28,7 +54,13 @@ export default {
       newReview: {
         title: this.review.title,
         content: this.review.content,
-      }
+      },
+      titleRules: [
+          v => !!v || "제목을 입력하세요",
+      ],
+      contentRules: [
+          v => !!v || "내용을 입력하세요",
+      ],
     }
   },
 
@@ -49,6 +81,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+/* #btn {
+  background-color: ;
+} */
 </style>

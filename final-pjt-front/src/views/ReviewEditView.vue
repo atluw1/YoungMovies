@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>리뷰 수정</h1>
+    <h1 class="text-center">게시글 수정</h1>
+    <br><br><br><br>
     <ReviewForm v-if="isReview" :review="review" action="수정" />
   </div>
 

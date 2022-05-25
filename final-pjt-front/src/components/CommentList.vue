@@ -1,6 +1,6 @@
 <template>
   <div class="comment-list">
-    
+    <comment-list-form></comment-list-form>
     <ul>
       <comment-list-item 
         v-for="comment in comments" 
@@ -8,8 +8,6 @@
         :key="comment.pk">
       </comment-list-item>        
     </ul>
-
-    <comment-list-form></comment-list-form>
   </div>
 </template>
 

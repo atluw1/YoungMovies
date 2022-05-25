@@ -76,7 +76,7 @@ export default {
       this.year = this.movieDetail.release_date.slice(0, 4)
       let movieGenres = ''
       for (const i in this.movieDetail.genres) {
-        movieGenres += `${this.movieDetail.genres[i]['name']}` 
+        movieGenres += `${this.movieDetail.genres[i]['name']} ` 
       }
       this.genres = movieGenres})
       .then((res) =>{
