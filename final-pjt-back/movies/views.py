@@ -56,7 +56,7 @@ def create_or_change_score(request):
             print(score)
             averageScore = {'averageScore': 0}
         else:
-            averageScore = {'averageScore': round(score['score__avg'], 2)}
+            averageScore = {'averageScore': round(score['score__avg'], 1)}
     else:
         # 여기는 잘 됨
         serializer = ScoreSerializer(data=Data)
@@ -64,7 +64,7 @@ def create_or_change_score(request):
             serializer.save(user=User, movie=movie)
             # 영화 스코어 평균
             score = Movie_score.objects.filter(movie=movie).aggregate(Avg('score'))
-            averageScore = {'averageScore': round(score['score__avg'], 2)}
+            averageScore = {'averageScore': round(score['score__avg'], 1)}
             print(averageScore)
     return Response(averageScore)
 
@@ -90,12 +90,12 @@ def initial_score(request):
     else:
         if isScoreExist:
             averageScore = {
-                'averageScore': round(score['score__avg'], 2),
+                'averageScore': round(score['score__avg'], 1),
                 'isScoreExist': True
                 }
         else:
             averageScore = {
-                'averageScore': round(score['score__avg'], 2),
+                'averageScore': round(score['score__avg'], 1),
                 'isScoreExist': False
                 }
     return Response(averageScore)

@@ -11,8 +11,8 @@
           <TrendingCarousel/>
         </div>
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
-          <h1 class="mb-3">최신 리뷰</h1>
-          <TrendingCarousel/>
+          <h1 class="mb-3">평점 높은 영화</h1>
+          <ReviewCarousel/>
         </div>
       </div>
     </div>
@@ -21,11 +21,13 @@
 
 <script>
   import TrendingCarousel from '@/components/TrendingCarousel.vue'
+  import ReviewCarousel from '@/components/ReviewCarousel.vue'
 
   export default {
     name: 'HomeView',
     components: {
     TrendingCarousel,
+    ReviewCarousel,
 },
   }
 </script>

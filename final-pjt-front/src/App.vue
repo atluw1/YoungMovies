@@ -55,7 +55,6 @@ export default {
     axios.get('http://127.0.0.1:8000/api/v1/score_carousel/')
     .then((res) =>{
       this.$store.dispatch('create_review_movies', res.data)
-      // print(this.$state.store.reviewMovies)
     })
     })
 }}

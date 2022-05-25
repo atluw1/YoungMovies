@@ -52,7 +52,7 @@ export default {
         url: 'http://127.0.0.1:8000/api/v1/score/',
         method: 'post',
         data: { 
-          score: parseInt(this.scoreText, 10),
+          score: this.scoreText* 2,
           movie_id: parseInt(this.movieId, 10)
           },
         headers: this.authHeader
@@ -63,11 +63,12 @@ export default {
     },
     // 평점 보내기
     sendStar: function () {
+      console.log(typeof this.scoreText)
       axios({
         url: 'http://127.0.0.1:8000/api/v1/score/',
         method: 'post',
         data: { 
-          score: parseInt(this.scoreText, 10) * 2,
+          score: this.scoreText* 2,
           movie_id: parseInt(this.movieId, 10)
           },
         headers: this.authHeader
