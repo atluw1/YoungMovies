@@ -9,19 +9,34 @@
         <p>{{ comment.created_at }}</p>
       </div>
     </router-link>
-    
-    <span v-if="!isEditing">{{ payload.content }}</span>
 
-    <span v-if="isEditing">
-      <input type="text" v-model="payload.content">
-      <button @click="onUpdate">확인</button> |
-      <button @click="switchIsEditing">취소</button>
-    </span>
+    <div class="d-flex justify-content-between">
+      <span v-if="!isEditing">{{ payload.content }}</span>
+      
+      <div v-if="isEditing" class="d-flex justify-content-between align-items-center">
+        <v-text-field
+          dark
+          color="yellow"
+          v-model="payload.content"
+          label="수정할 내용"
+          required
+          autofocus
+        ></v-text-field>
+          <!-- <input type="text" v-model="payload.content"> -->
+        <div>
+          <button @click="onUpdate">확인</button> |
+          <button @click="switchIsEditing">취소</button>
+        </div>
+      </div>
 
-    <span v-if="currentUser.username === comment.user.username && !isEditing">
-      <button @click="switchIsEditing">수정</button> |
-      <button @click="deleteComment(payload)">삭제</button>
-    </span>
+      <div v-if="currentUser.username === comment.user.username && !isEditing">
+        <div>
+          <button @click="switchIsEditing">수정</button> |
+          <button @click="deleteComment(payload)">삭제</button>
+        </div>
+      </div>
+    </div>
+    <hr>
   </div>
 </template>
 
