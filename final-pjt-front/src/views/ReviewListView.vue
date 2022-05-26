@@ -67,7 +67,7 @@
           { text: 'No', align: 'center', sortable: false, value: 'pk' },
           { text: '제목', align: 'center', sortable: false, value: 'title' },
           { text: '작성자', align: 'center', sortable: false, value: 'user.username' },
-          { text: '작성일', align: 'center', sortable: false, value: 'created_at' },
+          { text: '작성일', align: 'center', sortable: false, value: 'updated_at' },
         ],
         items: [],
         url: drf.reviews.reviews
