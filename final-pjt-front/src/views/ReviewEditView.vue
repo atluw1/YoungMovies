@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex row justify-content-center align-items-center">
-    <h1 class="text-center">게시글 수정</h1>
+    <br><br><br><br><br><br><br><br>
+    <h1 class="text-center m-0">게시글 수정</h1>
     <br><br><br><br>
     <ReviewForm v-if="isReview" :review="review" action="수정" />
   </div>

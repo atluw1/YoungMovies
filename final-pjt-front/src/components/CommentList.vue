@@ -1,13 +1,19 @@
 <template>
-  <div class="comment-list">
-    <comment-list-form></comment-list-form>
-    <ul>
-      <comment-list-item 
-        v-for="comment in comments" 
-        :comment="comment" 
-        :key="comment.pk">
-      </comment-list-item>        
-    </ul>
+  <div class="comment-list"><br>
+    <comment-list-form></comment-list-form><hr>
+    <comment-list-item 
+      v-for="comment in comments" 
+      :comment="comment" 
+      :key="comment.pk">
+    </comment-list-item>
+    <v-pagination
+    dark
+      v-model='page'
+      :length="pageCount"
+      :total-visible="totalVisible"
+      next-icon="mdi-menu-right"
+      prev-icon="mdi-menu-left">
+    </v-pagination>
   </div>
 </template>
 
@@ -19,6 +25,13 @@ import CommentListForm from '@/components/CommentListForm.vue'
 
 export default {
   name: 'CommentList',
+  data () {
+    return {
+      page: 1,
+      pageCount: 3,
+      totalVisible: 5,
+    }
+  },
   components: { CommentListForm, CommentListItem },
   props: { comments: Array },
 }

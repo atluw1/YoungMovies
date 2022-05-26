@@ -14,9 +14,8 @@
         </div>
       <v-btn
         id="btn"
-        color="accent"
         elevation="7"
-        class="mx-3"
+        class="mx-3 mb-5 indigo white--text"
         @click="onSubmit"
       >작성</v-btn>
     </div>
