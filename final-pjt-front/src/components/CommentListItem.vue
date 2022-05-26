@@ -10,7 +10,7 @@
           <span class="fw-bold"> {{ comment.user.username }}</span>
         </div>      
       </router-link>
-      <p>{{ comment.created_at }}</p>
+      <p>{{ comment.updated_at }}</p>
     </div>
 
     <div class="d-flex justify-content-between">

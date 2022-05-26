@@ -11,7 +11,7 @@
           <span id="name" class="fw-bold"> {{ review.user.username }}</span>
         </div>
       </router-link>
-      <p id="date">{{ review.created_at }}</p>
+      <p id="date">{{ review.updated_at }}</p>
     </div>
     <p id="content">{{ review.content }}</p>
     <!-- review Edit/Delete UI -->
