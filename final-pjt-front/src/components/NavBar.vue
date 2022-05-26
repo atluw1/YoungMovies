@@ -27,10 +27,9 @@
 
     <!-- navbar 중간 -->
     <div class="d-none nav_column d-md-flex justify-content-center position-relative">
-      <div>
-        <!-- <img class="logo" src="@/images/temp_logo.png" alt="임시 로고"> -->
+      <div class="position-absolute logo">
         <router-link :to="{ name: 'HomeView' }">
-          <h1>YoungMovies</h1>
+          <img class="logo_image" src="@/images/logo1.png" alt="">
         </router-link>
       </div>
     </div>
@@ -101,25 +100,24 @@ export default {
     background-color: rgba(0, 0, 0, 0.8);
     /* background-color: rgb(34, 46, 62, 0.8); */
 
-    height: 7rem;
+    height: 5rem;
     width: 70vw;
     border-radius: 3px;
   } 
 
-  /* 로고가 들어가는 블록 */
-  .logo_div {
-    /* position은 fixed로 해 주었기 때문에 width를 전체 화면 넓이 기준으로 잡아 준다 */
-    width: 20%;
-    height: 20%;
-    top: 0%
-  }
+
 
   /* 로고 자체의 속성 */
   .logo {
-    max-width: 100%;
-    height: auto;
-    display: block;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
   }
+
+  .logo_image {
+    width: 500px;
+  }
+
 
   .nav_column {
     width: 25%;

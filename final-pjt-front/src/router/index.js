@@ -146,7 +146,10 @@ router.beforeEach((to, from, next) => {
 
   // 로그인이 필요한 페이지
   // [] 안에 들어가는 이름은 위쪽 routes의 name!
-  const authPages = ['LogoutView', 'MyPageView',]
+  const authPages = ['LogoutView', 'SuggestedMoviesView', 'MyPageView',
+  'SuggestQueryView', 'ReviewCreateView', 'ReviewEditView', 'ReviewListView'
+  , 'DetailView', 'ReviewDetailView'
+  ]
 
   // 앞으로 이동할 페이지가 로그인이 필요한 사이트인지 확인
   const isAuthRequired = authPages.includes(to.name)

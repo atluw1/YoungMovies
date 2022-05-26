@@ -3,6 +3,9 @@
     <v-app>
       <!-- 전체를 감싸는 이미지 -->
       <div :style="backgroundStyle">
+        <div class="logo_area d-flex justify-content-center align-items-center">
+
+        </div>
         <nav class="navarea">
           <NavBar />
         </nav>
@@ -71,6 +74,10 @@ body {
   /* height: ; */
 }
 
+.logo_area {
+  height: 5vh;
+}
+
 @font-face {
     font-family: 'GongGothicMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
@@ -89,7 +96,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 10vh;
+  margin-bottom: 3vh;
 }
 
 /* 전체 background에 이미지 적용 */
