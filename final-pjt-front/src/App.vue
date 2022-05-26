@@ -14,6 +14,9 @@
           </main>
       </div>
     </v-app>
+    <div style='color:black;' class="bottom_pading">
+      .
+    </div>
   </div>
 </template>
 
@@ -77,8 +80,7 @@ body {
 
 /* 폰트 => 이사만루 medium */
 * {
-  color: #E91E48;
-  /* color: whitesmoke; */
+  color: #CFCFCF;
   font-family: 'GongGothicMedium';
 }
 
@@ -114,5 +116,9 @@ body {
   height: 60vh;
 }
 
+.bottom_padding {
+  height:15vh;
+  width: auto;
+}
 
 </style>

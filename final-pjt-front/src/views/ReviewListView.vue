@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="text-center">자유게시판</h1>
+    <div class="main_text">
     <v-card id="card">
       <v-card-title>
         자유게시판
@@ -45,6 +46,7 @@
         >글쓰기</v-btn>
       </div>
     </v-card>
+    </div>
   </div>
 </template>
 
@@ -90,6 +92,15 @@
 </script>
 
 <style scoped>
+
+.main_text {
+  color: black;
+}
+
+span {
+  color: black;
+}
+
 /* #card {
   background-color: rgba( 255, 255, 255, 0.3 );
 }

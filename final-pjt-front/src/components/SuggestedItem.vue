@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="IsPoster"
-    class="col-6 col-md-3"
+    class="col-6 col-md-3 my-3"
     @click="closeDialogMoveToDetail">
     <div
     class="d-flex align-items-center movie-poster-wrap">

@@ -214,7 +214,7 @@ span {
 
 .movie_box {
   height: 50vh;
-  width: 35%;
+  width: 40%;
 }
 
 
