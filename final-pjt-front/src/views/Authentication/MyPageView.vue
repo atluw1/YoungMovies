@@ -1,40 +1,50 @@
 <template>
   <div class="container">
+    <br><br><br>
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <h1>프로필</h1><br>
       <v-avatar
         class="mb-2"
         color="indigo"
-        size="128"
+        size="256"
         id="profile"
       >
-        <v-icon dark size="64">
+        <v-icon dark size="196">
           mdi-account-circle
         </v-icon>
       </v-avatar>
-      <h2>{{ profile.username }}</h2>
+      <h1 class="m-2">{{ profile.username }}</h1>
     </div>
     <br>
     <div class="d-flex flex-row">
-      <div class="col text-center">
+      <div class="col text-center d-flex row justify-content-center ">
         <h2>{{ profile.username }} 님이 작성한 게시글</h2>
-        <div class="text-left">
+        <br><br><br>
+        <div class="text-left w-75">
+          <hr>
           <ul>
             <li v-for="review in my_reviews" :key="review.pk">
-              <router-link :to="{ name: 'ReviewDetail', params: { review_pk: review.pk } }">
+              <router-link
+              class="text-decoration-none text-white" 
+              :to="{ name: 'ReviewDetail', params: { review_pk: review.pk } }">
                 {{ review.title }}
               </router-link>
+              <hr>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col text-center">
+      <div class="col text-center d-flex row justify-content-center">
         <h2>{{ profile.username }} 님이 좋아요 한 게시글</h2>
-        <div class="text-left">
+        <br><br><br>
+        <div class="text-left w-75">
+          <hr>
           <li v-for="review in my_likes" :key="review.pk">
-            <router-link :to="{ name: 'ReviewDetail', params: { review_pk: review.pk } }">
+            <router-link 
+            class="text-decoration-none text-white" 
+            :to="{ name: 'ReviewDetail', params: { review_pk: review.pk } }">
               {{ review.title }}
             </router-link>
+            <hr>
           </li>
         </div>
       </div>
@@ -83,7 +93,6 @@ export default {
     this.fetchMyPage(payload)
     this.myReviews()
     this.myLikes()
-    console.log(this.reviews)
   },
 }
 </script>

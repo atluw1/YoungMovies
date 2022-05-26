@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <br><br>
     <div class="d-flex wrap">
       <div class="poster">
         <img class="poster_size" :src="posterUrl" alt="poster">
