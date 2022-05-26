@@ -1,7 +1,7 @@
 <template>
-  <div class="middle">
+  <div class="middle condition">
     <div>
-    <h1 class="mb-5" v-show="isExist">당신이 찾는 영화입니다</h1>
+    <h1 class="mb-5" v-show="isExist">이런 영화는 어떠세요?</h1>
     <h1 v-show="!isExist">조건에 맞는 영화가 없습니다</h1>
     </div>
     <div v-show="isExist">
@@ -87,7 +87,7 @@ export default {
 
 .middle {
   position:relative;
-  top: 25vh;
+  /* top: 25vh; */
   height: 60%;
   width: 100%;
   display: flex;
@@ -96,4 +96,8 @@ export default {
   align-items: center;
 }
 
+.condition {
+  padding: 10px;
+  margin-top: 30vh
+}
 </style>
