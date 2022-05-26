@@ -94,7 +94,7 @@ body {
 }
 
 .logo_area {
-  height: 11vh;
+  height: 9vh;
 }
 
 @font-face {
