@@ -1,14 +1,17 @@
 <template>
+  <!-- 아이콘+작성자 이름 , 작성일 -->
   <div class="comment-list-item">
-    <router-link :to="{ name: 'MyPageView', params: { username: comment.user.username } }">
-      <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
+      <router-link
+        style="text-decoration: none"
+        :to="{ name: 'MyPageView', params: { username: comment.user.username } }">
         <div>
           <i class="fa-solid fa-user"></i>
-          <span> {{ comment.user.username }}</span>
+          <span class="fw-bold"> {{ comment.user.username }}</span>
         </div>      
-        <p>{{ comment.created_at }}</p>
-      </div>
-    </router-link>
+      </router-link>
+      <p>{{ comment.created_at }}</p>
+    </div>
 
     <div class="d-flex justify-content-between">
       <span v-if="!isEditing">{{ payload.content }}</span>

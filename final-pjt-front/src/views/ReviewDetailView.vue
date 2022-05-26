@@ -2,17 +2,27 @@
   <div class="container">
     <h1 id="title">{{ review.title }}</h1>
     <hr>
-    <i class="fa-solid fa-user"></i>
-    <span id="name" class="fw-bold"> {{ review.user.username }}</span>
-    <p id="date"  class="text-right">{{ review.created_at }}</p>
+    <div class="d-flex justify-content-between">
+      <router-link
+      style="text-decoration: none"
+      :to="{ name: 'MyPageView', params: { username: review.user.username } }">
+        <div>
+          <i class="fa-solid fa-user"></i>
+          <span id="name" class="fw-bold"> {{ review.user.username }}</span>
+        </div>
+      </router-link>
+      <p id="date">{{ review.created_at }}</p>
+    </div>
     <p id="content">{{ review.content }}</p>
     <!-- review Edit/Delete UI -->
     <div v-if="isAuthor" class="text-right">
-      <router-link :to="{ name: 'ReviewEdit', params: { review_pk } }">
-        <button>수정</button>
+      <router-link
+        style="text-decoration: none; color: inherit;"
+        :to="{ name: 'ReviewEdit', params: { review_pk } }">
+        <button style="color: royalblue">수정</button>
       </router-link>
-      |
-      <button @click="deleteReview(review_pk)">삭제</button>
+      <button class="mx-2"
+      style="color: red" @click="deleteReview(review_pk)">삭제</button>
     </div>
 
     <!-- review Like UI -->
