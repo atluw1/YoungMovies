@@ -1,185 +1,198 @@
-# Final Project: YoungMovies(가제)
+# YOUNG MOVIES
 
-[toc]
 
-## 0. TMDB 쿼리 목록
 
-### `<>` 태그로 묶은 부분이 변수임!
+## :computer: 목표 서비스
 
-- TMDB API 메인화면
-  - https://developers.themoviedb.org/3/getting-started/introduction
+사용자가 보고 싶은 영화의 장르, 개봉시기, 런타임, 관람객 평점을 기반으로 개인화 추천 서비스를 제공합니다. 이외에도 최신 영화 및 서비스 사용자들이 감명 깊게 본 영화들을 추천받을 수 있습니다. 사용자들은 자유게시판을 활용하여 영화와 관련된 다양한 정보들을 교류할 수 있습니다.
 
 
 
-- Image 쿼리 날리기
-  - tmdb에서 제공되는 이미지의 url
-  - `https://image.tmdb.org/t/p/<image설정>/<image_path>`
-  - 예시
-    - 원본 사이즈: https://image.tmdb.org/t/p/original/xHrp2pq73oi9D64xigPjWW1wcz1.jpg
-    - 가로 500 사이즈(영화별로 지원 안 되는 사이즈가 있을 수 있음!) https://image.tmdb.org/t/p/w500/xHrp2pq73oi9D64xigPjWW1wcz1.jpg
-    - https://image.tmdb.org/t/p/original/gG9fTyDL03fiKnOpf2tr01sncnt.jpg
+## :man_technologist: Team Sort
 
+**김현영**
 
+- BackEnd
+  1. Movie 모델링
+  2. Movie Serializer
+- FrontEnd
+  1. 영화 검색 기능 & 페이지
+  2. 영화 추천 기능 & 페이지
+  3. 메인 페이지 디자인 및 Carousel
+  4. Login & Signup
 
-- 영화 상세 페이지 쿼리
-  - 영화의 상세한 정보를 제공해주는 페이지
-  - `https://api.themoviedb.org/3/movie/<movie_id>?api_key=<api_key>&language=ko-KR`
+**김영훈**
 
+* BackEnd
+  1. review 모델링
+  2. comment 모델링
+  3. review, comment Serializer 등 백엔드 전반
 
+* FrontEnd
+  1. 영화 상세 페이지
+  2. 자유 게시판(review) 페이지
+  3. 게시글(review) 상세 페이지
+  4. 게시글 생성, 수정 페이지
+  5. 유저 프로필 페이지
 
-- 영화 추천 쿼리 날리기
-  - 사용자가 조건을 정해서 영화를 추천 받는 페이지에서의 쿼리 날리기
-  - 이 부분은 https://developers.themoviedb.org/3/discover/movie-discover 이 페이지에서 참고
-  - api key
-    - language = ko-KR 고정
-    - include adult => boolean
-    - with_genres
 
 
+## :bulb: 목표 기능
 
+- 영화 추천
+- 영화 검색
+- 영화 정보 조회
+  - 영화 제목
+  - 개봉일
+  - 장르
+  - 런타임
+  - TMDB 평점
+  - 영무비 평점
+  - 줄거리
+- 자유 게시판 기능
+- 게시글 작성, 수정, 삭제, 조회, `좋아요`
+- 게시글에 댓글 작성, 수정, 삭제
+- 회원 가입
+- 프로필 조회
+  - 아이디
+  - 작성한 게시글
+  - `좋아요`를 누른 게시글
 
 
-- 영화 검색 바 쿼리 날리기
-  - 검색 창에서 영화를 글자를 날려 찾는 쿼리 날리기
-  - `https://api.themoviedb.org/3/search/movie?api_key=<api_key>&language=ko-KR&query=<검색어>&page=1&include_adult=true`
 
+## :floppy_disk: ERD
 
+![최종프로젝트ERD](README_영훈.assets/최종프로젝트ERD.png)
 
-- 영화 youtube 트레일러 쿼리 날리기
-  - `https://api.themoviedb.org/3/movie/<movie_id>/videos?api_key=<api_key>&language=ko-KR`
-  - 날려서 나온 결과값은 video가 엄청 많이 나온다 그 중에서 type이 trailer인 것들 중에서 뽑아서
-  - `https://www.youtube.com/watch?v=<key>`에 넣는다
-  - 유튜브 API를 사용하는 게 더 정확하다고 한다. 일단 TMDB video를 활용하되 시간이 남으면 유튜브를 건드려보자
+1. `User`와 `Review`, `ReviewComment`, `MovieScore`는 1:N 관계를 갖는다. `User`는 각 모델의 작성자로써 이용된다.
+2. `Review`와 `ReviewComment`는 1:N 관계를 갖는다.
+3. `Collection`과 `CollectionCommen`는 1:N 관계를 갖는다.
+4. `User`와 `Movie`, `Review`는 M:N 관계를 갖는다. `User`는 `좋아요` 표시를 한 `like_users`로써 이용된다.
 
 
 
-## 1. 적용 알고리즘
+## :open_file_folder: 개발 도구
 
-- 사용자가 직접 자신이 원하는 영화 조건을 검색하고 쿼리를 쏘아 주면 이를 응답하는 식
+- Python
+  - Python 3
+  - Django 3.2.12
+  - Django REST framework 3.13.1
+- HTML, CSS
+  - Bootstrap 5
+  - Animate CSS 4.1.1
+- Javascript
+  - ECMA6 +
+- Vue 2
+  - Vuex
+  - Vue Router
+  - Vuetify 2
+- Database
+  - sqlite3
 
 
 
-## 2. 페이지
+## :calling: 서비스
 
-1. 메인 페이지
+## :video_camera: **영화**
 
-   - 로고
-   - navbar => 영화 검색(search기능으로 한글자씩 넣는거)
-     - 구현중
-   - 추천 쿼리를 기반으로 한 영화 목록들
-     - 
-   - now playing
+### 메인페이지
 
-2. 상세 페이지
+![mainpage](README_영훈.assets/mainpage.jpg)
 
-   - 페이지로 넘어가게?
-   - 상세 페이지 디자인 컨셉 => 따라하지 말고 이런 느낌으로
+- 메인 페이지는 세 개의 Carousel로 구성된다.
+  - 왼쪽 Carousel은 TMDB에서 제공하는 최신 영화들 중 흥행 중인 영화가 선택된다.
+  - 중간 Carousel은 사용자가 추천 서비스를 이용한 결과를 추후에 다시 확인할 수 있도록 보여준다.
+  - 오른쪽 Carousel은 서비서 사용자들이 직접 평가한 영화들 중 평점 상위 10개의 영화를 보여준다.
+- 반응형 웹 형태로 구성함으로써, 좁은 화면에서도 페이지를 효율적으로 이용할 수 있도록 하였다.
 
-   ![상세 페이지 디자인 컨셉](README.assets/상세 페이지 디자인 컨셉.jpg)
 
-   ![구현](README.assets/구현.jpg)
 
-   
+### **추천**
 
-3. 추천 영화 쿼리 날리는 페이지
+![image-20220527033440841](README_영훈.assets/image-20220527033440841.png)
 
-   - 여러가지 조건들을 입력받아 쿼리를 날린다.
+- TMDB에서 제공하는 영화 정보들 중 사용자의 취향에 맞는 영화를 찾을 수 있도록 4개의 파라미터를 제공한다. 
+  - 장르는 여러 개를 선택 가능하며, 해당 장르를 모두 가지고 있는 영화가 검색된다.
+  - 개봉 연도는 두 개의 기준점을 정해서, 그 사이 개봉년도를 가진 영화들만 검색된다.
+  - 상영 시간도 개봉 연도와 마찬가지로 두 개의 기준 시간을 선택할 수 있다.
+  - 평점 하한선은 TMDB 평점을 기준으로, 그 이상의 평점을 가진 영화들이 검색된다.
 
-   
 
-4. 리뷰 페이지
 
-   - 기본적으로 리뷰 목록 + pagination으로 구현
-   - 영화별로 리뷰 찾기 => TMDB 쿼리 쏘기 or 우리 DB에 쿼리 쏘기
+### **추천 영화**
 
+![image-20220527033659302](README_영훈.assets/image-20220527033659302.png)
 
+* 사진과 같이 8개의 영화가 추천된다.
+* 추천되는 순간 브라우저에 저장되며, 메인 페이지의 Carousel과 뒤로 가기를 통해 다시 확인할 수 있다.
 
-4. 회원정보 페이지
 
-5. 회원가입
 
-6. 로그인
-   - veutify 활용 =>
-7. 가입 안 하면 이용 못 하게
+### **영화 검색 기능**
 
-### 1. 메인 페이지
+![image-20220527012902201](README_영훈.assets/image-20220527012902201.png)
 
-- 본 영화는 추천하지 않게 Movie에 column 추가도 필요할 듯 하다.
+* 사용자는 TMDB에 존재하는 모든 영화를 기반으로 원하는 영화를 검색할 수 있다. 검색 결과는 사용자의 입력 값에 따라 실시간으로 출력되며 결과를 누를 경우 해당 영화의 상세 페이지로 이동한다.
+* 반응형 웹 구조를 사용하여, 좁은 화면에서도 효율적으로 영화를 검색할 수 있다.
 
-- carousel을 만들 때,
 
 
+## :page_facing_up: 자유 게시판
 
-### 1. 검색 페이지
+사용자들이 영화와 관련하여 자유롭게 소통할 수 있는 자유 게시판 기능
 
-- 
+![reviewslist](README_영훈.assets/reviewslist.png)
 
+* 댓글수, 좋아요, 작성일을 기준으로 정렬하여 조회할 수 있다.
+* 검색 기능을 통해 원하는 게시글을 검색하여 조회할 수 있다.
+* 게시글을 클릭하면 해당 게시글의 상세 페이지로 이동한다.
 
 
 
+### **게시글**
 
-### 2. 리뷰 페이지
+![reviewdetail](README_영훈.assets/reviewdetail.png)
 
-#### 1. 메인 화면에서는 리뷰 목록을 띄워 줌 => 옆에
+* 로그인한 사용자는 게시글을 작성, 수정, 삭제할 수 있다.
+* 게시글에 대해 `좋아요`를 누를 수 있으며, 해당 게시글에 대한 총 `좋아요` 수를 나타낸다.
+* 댓글 조회, 작성, 수정, 삭제가 가능하다.
 
+- 게시글 작성자, 댓글 작성자의 아이디를 클릭하면 해당 사용자의 프로필 페이지로 이동한다.
 
+- 목록 버튼을 클릭하면 자유게시판으로 이동한다.
 
-영화로 리뷰 찾아보기
+  
 
-- 
+## :bust_in_silhouette: **사용자**
 
-- 영화 평점 1 ~ 5점 정하기 => serializer에서
+### 회원가입
 
-- validators=[
+![image-20220527021946113](README_영훈.assets/image-20220527021946113.png)
 
-MaxValueValitor(5)
+### 로그인
 
-MinValueValitor(1)
+![image-20220527022013020](README_영훈.assets/image-20220527022013020.png)
 
-]
+### 프로필 페이지
 
+![profile](README_영훈.assets/profile.png)
 
+* 사용자는 개인 프로필 페이지가 존재하며 프로필에서 사용자가 작성한 게시글, `좋아요`를 누른 게시글들을 확인할 수 있다.
 
-### 3. 회원정보 페이지
 
 
+## :thinking: 느낀 점
 
+### 현영
 
+* 생각보다 모델링을 갈아엎는 일이 많지는 않았는데, 시리얼라이저 등 백엔드 부분을 다루어 본 지 오래되어 많이 해멨다.
+* 뷰에서 데이터 흐름이 중요하다는 말이 왜 나왔는지 깨달았다. 데이터를 다룰 때 타입 에러 등의 오류와, life cycle hook에 따라 페이지에 렌더링 되는 순서 때문에 발생하는 오류가 매우 빈번했다.
+* 외부에서 코드를 가져올 때 이해를 완전히 하지 못했기 때문에 기존의 코드와 꼬이는 부분이 생겼다.
+* 조금 더 다양한 기능을 구현해 보지 못한 부분이 아쉽다. 시간이 좀 더 있었다면...
 
-### 4. 회원가입
+### :cat: 영훈
 
-
-
-
-
-### 5. 로그인
-
-
-
-
-
-## 날짜별 로그: 나중을 위해서 작성하자
-
-### 05/20
-
-#### 김현영
-
-#### 김영훈
-
-
-
-### 0521
-
-김현영
-
-김영훈
-
-#### 느낀 점
-
-workflow를, 작업별로 만들고, 기본 기능부터 진행해 나가야 한다는 것을 느꼈다
-
-예를 들어, 리뷰를 쓰려고 하면, 회원 인증이 필수여야 하고, 
-
-우리 서비스 구상에서는, 리뷰를 쓰려면, 영화 정보가 있어야 한다.
-
-따라서 회원가입 => 영화 정보 => 리뷰 순서로 구현하는 것이 맞다.
+* 프로젝트 시작이 정말 중요하단 걸 느꼈다. 어떤 서비스를 만들 것인지, 그에 따라 어떤 모델이 필요할 것인지 등 꽤 구체적으로 계획을 하고 프로젝트를 진행하는 게 효율적이라는 점을 배웠다.
+* 프론트엔드를 다루며 디자인 역량도 꽤 중요하다는 걸 느꼈다. 같은 기능이라도 어떤 디자인인지에 따라 더 좋아보이고 사용하고 싶게끔 만든다는 걸 느꼈다. 다양한 레이아웃과 디자인들을 찾아보며 감을 익히는 것도 필요할 것 같다.
+* vue 사용이 아직 익숙치 않아 고전했다. vue life cycle hook에 대한 이해를 높이기 위해 더 공부해야 겠다고 생각했다. 그리고 자바스크립트 문법 또한 한참 다루며 익혀야 겠다고 생각했다. 단순한 for 문, if 문 인데도 바로바로 떠오르지 않았다.
+* 협업 과정에서 소통이 상당히 중요하다는 점. git으로 버전관리를 할 때 작업 전, 후로 상대방과 긴밀히 소통하며 작업을 해야 충돌 issue가 발생하지 않고 원활하게 프로젝트가 진행될 수 있을 것 같다.
