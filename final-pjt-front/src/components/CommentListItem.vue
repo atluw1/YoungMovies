@@ -6,7 +6,7 @@
         style="text-decoration: none"
         :to="{ name: 'MyPageView', params: { username: comment.user.username } }">
         <div>
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user" style="color:tomato"></i>
           <span class="fw-bold"> {{ comment.user.username }}</span>
         </div>      
       </router-link>
@@ -14,28 +14,30 @@
     </div>
 
     <div class="d-flex justify-content-between">
-      <span v-if="!isEditing">{{ payload.content }}</span>
+      <span v-if="!isEditing">&nbsp;&nbsp;&nbsp;&nbsp;{{ payload.content }}</span>
       
-      <div v-if="isEditing" class="d-flex justify-content-between align-items-center">
-        <v-text-field
-          dark
-          color="yellow"
-          v-model="payload.content"
-          label="수정할 내용"
-          required
-          autofocus
-        ></v-text-field>
+      <div v-if="isEditing" class="d-flex row justify-content-between align-items-center">
+        <div>
+          <v-text-field
+            dark
+            color="yellow"
+            v-model="payload.content"
+            label="수정할 내용"
+            required
+            autofocus
+          ></v-text-field>
+        </div>
           <!-- <input type="text" v-model="payload.content"> -->
         <div>
-          <button @click="onUpdate">확인</button> |
-          <button @click="switchIsEditing">취소</button>
+          <button style="color: seagreen" @click="onUpdate">확인 </button> |
+          <button @click="switchIsEditing"> 취소</button>
         </div>
       </div>
 
       <div v-if="currentUser.username === comment.user.username && !isEditing">
         <div>
-          <button @click="switchIsEditing">수정</button> |
-          <button @click="deleteComment(payload)">삭제</button>
+          <button style="color: royalblue" @click="switchIsEditing">수정</button> |
+          <button style="color: red" @click="deleteComment(payload)">삭제</button>
         </div>
       </div>
     </div>

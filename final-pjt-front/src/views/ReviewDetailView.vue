@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container"><br><br><br>
     <h1 id="title">{{ review.title }}</h1>
     <hr>
     <div class="d-flex justify-content-between">
@@ -7,12 +7,13 @@
       style="text-decoration: none"
       :to="{ name: 'MyPageView', params: { username: review.user.username } }">
         <div>
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user"
+            style="color:tomato"></i>
           <span id="name" class="fw-bold"> {{ review.user.username }}</span>
         </div>
       </router-link>
       <p id="date">{{ review.updated_at }}</p>
-    </div>
+    </div><br>
     <p id="content">{{ review.content }}</p>
     <!-- review Edit/Delete UI -->
     <div v-if="isAuthor" class="text-right">
@@ -26,17 +27,26 @@
     </div>
 
     <!-- review Like UI -->
-    <div>
-      <vue-star 
-        animate="animated bounceIn"
-        color="#F05654"
-        id="heart">
-        <i slot="icon" class="fa fa-heart fa-2xl d-flex justify-content-center align-items-center"
-        @click="likeReview(review_pk)"></i>
-      </vue-star>
-      {{ likeCount }}
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex wrap align-items-center">
+        <vue-star 
+          animate="animated bounceIn"
+          color="#F05654"
+          id="heart">
+          <i slot="icon" class="fa fa-heart fa-2x d-flex justify-content-center align-items-center"
+          style="color:#E91E48"
+          @click="likeReview(review_pk)"></i>
+        </vue-star>
+        <p class="m-0">좋아요: {{ likeCount }}</p>
+      </div>
+      <v-btn
+        id="btn"
+        color="success"
+        elevation="7"
+        @click="goReviews"
+      >목록</v-btn>
     </div>
-    <hr/>
+    <hr class='mt-0'/>
     <!-- Comment UI -->
     <CommentList :comments="review.comments" />
   </div>
@@ -68,7 +78,10 @@
         'fetchReview',
         'likeReview',
         'deleteReview',
-      ])
+      ]),
+      goReviews () {
+        this.$router.push({ name: 'ReviewListView' })
+      }
     },
     created() {
       this.fetchReview(this.review_pk)
@@ -78,7 +91,7 @@
 
 <style scoped>
 #heart {
-  position: static;
+  position: relative;
 }
 
 .container {

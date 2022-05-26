@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1 class="text-center">자유게시판</h1>
+    <br><br><br>
+    <h1 class="text-center">자유게시판</h1><br>
     <div class="main_text">
     <v-card 
       dark
@@ -29,7 +30,7 @@
         class="elevation-1"
         @page-count="pageCount = $event"
         @click:row="handleClick"
-        style="cursor:pointer">
+        style="cursor:pointer;">
       </v-data-table>
       <div class="text-center pt-2">
         <v-pagination
@@ -55,7 +56,6 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import drf from '@/api/drf'
 
   export default {
     name: 'ReviewList',
@@ -70,10 +70,11 @@
           { text: 'No', align: 'center', sortable: false, value: 'pk' },
           { text: '제목', align: 'center', sortable: false, value: 'title' },
           { text: '작성자', align: 'center', sortable: false, value: 'user.username' },
-          { text: '작성일', align: 'center', sortable: false, value: 'updated_at' },
+          { text: '댓글수', align: 'center', sortable: true, value: 'comment_count' },
+          { text: '좋아요', align: 'center', sortable: true, value: 'like_count' },
+          { text: '작성일', align: 'center', sortable: true, value: 'updated_at' },
         ],
         items: [],
-        url: drf.reviews.reviews
       }
     },
     computed: {
@@ -90,34 +91,16 @@
     },
     created() {
       this.fetchReviews()
+      console.log(this.reviews)
     },
   }
 </script>
 
 <style scoped>
 
-.main_text {
-  color: black;
-}
-
-span {
-  color: black;
-}
-
-.v-data-table {
-  color: black;
-}
-
-/* #card {
-  background-color: rgba( 255, 255, 255, 0.3 );
-}
-
-#table {
-  background-color: rgba( 255, 255, 255, 0.8 );
-  color: royalblue;
-} */
 #btn {
   color: white;
-  background-color: lightcoral;
+  background-color: royalblue;
 }
+
 </style>

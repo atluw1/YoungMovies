@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex row justify-content-center align-items-center">
-    <h1 class="text-center">게시글 작성</h1>
-
+    <br><br><br><br><br><br><br><br>
+    <h1 class="text-center m-0">게시글 작성</h1>
     <ReviewForm :review='review' action='작성' />
   </div>
 </template>
