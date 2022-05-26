@@ -14,7 +14,7 @@
       </router-link>
       <p id="date">{{ review.updated_at }}</p>
     </div><br>
-    <p id="content">{{ review.content }}</p>
+    <p id="content" style="white-space: pre;">{{ review.content }}</p>
     <!-- review Edit/Delete UI -->
     <div v-if="isAuthor" class="text-right">
       <router-link
