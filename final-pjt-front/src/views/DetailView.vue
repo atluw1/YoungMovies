@@ -15,7 +15,10 @@
         <span class="genres"> {{ genres }} /</span>
         <span class="genres"> {{ movieDetail.runtime }}분</span>
         <br><br>
-        <h4>{{ movieDetail.vote_average }}</h4>
+        <div class="d-flex align-items-center">
+          <i class="fa fa-star fa-3x"></i><br>
+          <h6 class="rating" style="color:white">{{ movieDetail.vote_average }}</h6>
+        </div><br>
         <!-- tagline이 있을 때만 보여주기 -->
         <span v-if="movieDetail.tagline" class="tagline fw-bold">"{{ movieDetail.tagline }}"</span>
         <div>
@@ -117,6 +120,10 @@ export default {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.tagline {
+  font-size: larger;
+}
+
 .detail {
   /* color: white; */
   margin: 2rem;
@@ -149,6 +156,22 @@ h3 {
 #overview {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
+  font-size: larger;
+}
+
+.fa {
+  position: relative;
+  background: linear-gradient(gold, tomato);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rating {
+  position: absolute;
+  margin-top: 13px;
+  margin-left: 14px;
+  font-weight: bold;
+  /* color: ; */
 }
 
 </style>
