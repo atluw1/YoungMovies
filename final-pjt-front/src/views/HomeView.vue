@@ -1,5 +1,5 @@
 <template>
-  <div class="my-4 d-flex justify-content-center">
+  <div class="mainpage d-flex justify-content-center">
     <div class="container">
       <div class="row">
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
@@ -36,5 +36,8 @@ import SuggestedCarousel from '@/components/SuggestedCarousel.vue'
 
 <style scope>
 
-
+.mainpage {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
 </style>

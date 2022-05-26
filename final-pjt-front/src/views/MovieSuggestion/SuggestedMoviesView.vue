@@ -86,8 +86,8 @@ export default {
 <style>
 
 .middle {
-  position:relative;
-  /* top: 25vh; */
+  top: 5%;
+  /* left: 50%; */
   height: 60%;
   width: 100%;
   display: flex;
@@ -98,6 +98,7 @@ export default {
 
 .condition {
   padding: 10px;
-  margin-top: 30vh
+  margin-top: 30vh;
+  position: relative;
 }
 </style>
