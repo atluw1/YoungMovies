@@ -2,7 +2,9 @@
   <div>
     <h1 class="text-center">자유게시판</h1>
     <div class="main_text">
-    <v-card id="card">
+    <v-card 
+      dark
+      id="card">
       <v-card-title>
         자유게시판
         <v-spacer></v-spacer>
@@ -16,6 +18,7 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table
+        dark
         id="table"
         :headers="headers"
         :items="reviews"
@@ -98,6 +101,10 @@
 }
 
 span {
+  color: black;
+}
+
+.v-data-table {
   color: black;
 }
 
