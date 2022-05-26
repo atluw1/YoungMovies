@@ -1,43 +1,39 @@
--<template>
-  <form @submit.prevent="onSubmit">
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="w-50">
-        <v-text-field
-          dark
-          color="yellow"
-          v-model="newReview.title"
-          :rules="titleRules"
-          label="제목"
-          required
-          autofocus
-        ></v-text-field>
-      </div>
-
-      <div class="w-50">
-        <v-textarea
-          dark
-          clearable
-          clear-icon="mdi-close-circle"
-          :rules="contentRules"
-          color="yellow"
-          v-model="newReview.content"
-          label="내용"
-          required
-        ></v-textarea>
-      </div>
+<template>
+  <div class="animated-box in d-flex justify-content-center align-items-center">
+    <form @submit.prevent="onSubmit" class="form">
+      <v-text-field
+        dark
+        color="yellow"
+        v-model="newReview.title"
+        :rules="titleRules"
+        label="제목"
+        required
+        autofocus
+      ></v-text-field>
+      <br><br><br>
+      <v-textarea
+        dark
+        clearable
+        clear-icon="mdi-close-circle"
+        :rules="contentRules"
+        color="yellow"
+        v-model="newReview.content"
+        label="내용"
+        required
+      ></v-textarea>
+      <br><br><br>
       <div>
-        <div class="text-right">
+        <div class="text-center">
           <v-btn
             id="btn"
             color="success"
             elevation="7"
-            class="mx-3 mb-3"
             @click="onSubmit"
           >{{ action }}</v-btn>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -85,4 +81,13 @@ export default {
 /* #btn {
   background-color: ;
 } */
+.animated-box {
+  width: 800px;
+  height: 700px;
+}
+
+.form {
+  width: 400px;
+  margin-top: 5rem;
+}
 </style>

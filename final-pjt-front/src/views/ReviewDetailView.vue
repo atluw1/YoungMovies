@@ -76,13 +76,14 @@
   }
 </script>
 
-<style>
+<style scoped>
 #heart {
   position: static;
 }
 
 .container {
   background-color: (255, 255, 255, 0.5);
+  width: 1000px;
 }
 
 /* #title {
