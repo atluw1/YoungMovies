@@ -39,23 +39,23 @@ export default {
     ...mapActions(['create_suggested_movies']),
     ...mapGetters(['getSuggestedMovies']),
     getMovie: function () {
+      let URL = this.URL
       axios(
         {
           method:'get',
           url: this.URL,
         }).then(res => {
           console.log(res.data)
-          
           const max_page = res.data.total_pages
           if (max_page === 0) {
             this.isExist = false
           }
           else {
-          let search_page = _.sample(_.range(max_page))
+          let search_page = _.sample(_.range(1, max_page))
           if (search_page > 500) {
             search_page = 500
           }
-          const URL = this.URL + `&page=${search_page}`
+          URL += `&page=${search_page}`
           console.log(URL)
           axios({
             method:'get',

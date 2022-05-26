@@ -15,8 +15,8 @@
         :key="i"
         :src="item.poster_path"
         :to="{ name: 'DetailView', params: { movieId: item.tmdb_id } }"
-        style="height: auto; width: 100%;"  
-      >
+        style="height: auto; width: 100%;"
+        >
 
       </v-carousel-item>
     </v-carousel>

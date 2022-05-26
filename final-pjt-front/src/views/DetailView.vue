@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <br><br>
+  <div class="container top-margin">
     <div class="d-flex wrap">
       <div class="poster">
         <img class="poster_size" :src="posterUrl" alt="poster">
@@ -16,9 +15,14 @@
         <span class="genres"> {{ genres }} /</span>
         <span class="genres"> {{ movieDetail.runtime }}분</span>
         <br><br>
+        <div class="d-flex justify-content-start">
         <div class="d-flex align-items-center">
           <i class="fa fa-star fa-3x"></i><br>
-          <h6 class="rating" style="color:white">{{ movieDetail.vote_average }}</h6>
+          <h6 class="rating pe-1" style="color:white">{{ movieDetail.vote_average }}</h6>
+        </div>
+        <div class="ms-5 pt-2">
+          <StarRating :movieId="movieId" />
+        </div>
         </div><br>
         <!-- tagline이 있을 때만 보여주기 -->
         <span v-if="movieDetail.tagline" class="tagline fw-bold">"{{ movieDetail.tagline }}"</span>
@@ -29,7 +33,7 @@
       </div>
     </div>
     <div>
-      <h3><StarRating :movieId="movieId" /></h3>
+      <h3></h3>
     </div>
   </div>
 </template>
@@ -104,6 +108,10 @@ export default {
 </script>
 
 <style scoped>
+
+.top-margin {
+  margin-top: 3vh;
+}
 
 .poster {
   margin: 2rem;
