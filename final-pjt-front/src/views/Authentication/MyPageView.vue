@@ -80,7 +80,6 @@ export default {
     myLikes() {
       for (const review of this.reviews) {
         for (const pk of review.like_users) {
-          console.log(pk)
           if (pk === this.profile.id) {
             this.my_likes.push(review)
           }

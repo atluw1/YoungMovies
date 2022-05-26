@@ -91,7 +91,6 @@
     },
     created() {
       this.fetchReviews()
-      console.log(this.reviews)
     },
   }
 </script>
