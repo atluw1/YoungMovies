@@ -16,7 +16,9 @@ export default new Vuex.Store({
   },
   getters: {
     getApiKey: state => state.apiKey,
-    getSuggestedMovies: state => state.suggestedMovies
+    getTrendingMovies: state => state.trendingMovies,
+    getSuggestedMovies: state => state.suggestedMovies,
+    getReviewedMovies: state => state.reviewMovies,
   },
   mutations: {
     CREATE_TRENDING_MOVIES: function (state, movies) {

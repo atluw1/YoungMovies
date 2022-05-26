@@ -16,7 +16,9 @@
             v-on="on"
           >
             <v-icon>mdi-movie-search-outline</v-icon>
+            <span class="d-none d-xl-inline" style="line-height: normal; margin-left:0.2rem;"> 검색</span>
           </v-btn>
+
         </template>
         <!-- 버튼 누르면 뜨는 부분 -->
         <template v-slot:default="dialog"> <!-- 얘를 설정 안 해주면 아래 닫기 버튼이 눌리지 않는다.-->

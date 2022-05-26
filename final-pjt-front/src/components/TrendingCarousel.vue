@@ -25,6 +25,7 @@
 
 <script>
 import _ from 'lodash'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TrendingCarousel',
@@ -40,14 +41,16 @@ export default {
   },
   // router-link를 받는 두 가지 방법: https://any-ting.tistory.com/46
   computed: {
+    ...mapGetters(['getTrendingMovies']),
+
     movies() {
-      return this.$store.state.trendingMovies
+      return this.getTrendingMovies
     }
   }
 }
 
 
-</script >
+</script>
 
 
 <style>

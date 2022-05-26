@@ -86,7 +86,7 @@
         <div >
           <div class="mb-5 d-flex flex-column align-items-center justify-content-evenly">
             <h2 style="color:#e91e63;">
-              평점 하한
+              평점 하한선
             </h2>
           </div>
           <div class="vote_average_slider">
@@ -206,7 +206,7 @@ span {
 }
 
 .main_form_box {
-  margin-top: 2rem;
+  margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;

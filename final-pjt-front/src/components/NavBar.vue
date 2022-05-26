@@ -20,7 +20,7 @@
         <!-- navbar 왼쪽 => 로그인 되었을 때 -->
     <div v-show="isLoggedIn" class="nav_column">
         <div class="column_in_column_logged_in">
-          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
+          <router-link  class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
             Hello, <br>
             {{ currentUser.username }}
           </router-link> 
@@ -56,20 +56,21 @@
               x-large
               href="https://lab.ssafy.com/bizyoung93/final-pjt"
               color="green">
-              <v-icon>mdi-filmstrip
-              </v-icon>
+              <v-icon>mdi-filmstrip</v-icon>
+              <span class="d-none d-xl-inline">추천</span>
             </v-btn>            
           </router-link> 
       </div>
       <div class="column_in_column">
           <router-link class="router_anchor" :to="{ name: 'ReviewListView' }">
-            <v-btn        
+            <v-btn
               icon
               x-large
               href="https://lab.ssafy.com/bizyoung93/final-pjt"
               color="purple">
               <v-icon>mdi-text-box-search-outline
               </v-icon>
+              <span class="d-none d-xl-inline">게시판</span>
             </v-btn> 
           </router-link> 
       </div>
@@ -167,5 +168,10 @@ export default {
   .router_anchor {
   color: #E91E48;
   
+}
+
+
+.move_button:hover {
+  display: none;
 }
 </style>

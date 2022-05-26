@@ -1,14 +1,17 @@
 <template>
-  <div class="mt-5 signupDiv d-flex flex-column justify-content-center align-items-center">
-    <h2 class="mb-5">
+  <div class="loginArea signupDiv d-flex flex-column justify-content-center align-items-center">
+    <h1 class="mb-5">
     로그인
-    </h2>
-    <v-form  @submit.prevent="login(credentials)" class="signupForm animated-box in py-5 d-flex flex-column justify-content-evenly align-items-center">
+    </h1>
+    <v-form @submit.prevent="login(credentials)" class="loginForm animated-box in py-5 ">
+        <div class="innerbox d-flex flex-column justify-content-around align-items-center">
           <div class="mb-1" v-if="authError">
             <!-- <AccountErrorList /> -->
             입력을 다시 확인해 주세요
           </div>
+
           <!-- 아이디 -->
+          <div>
           <v-text-field
             dark
             color="yellow"
@@ -18,7 +21,10 @@
             required
             autofocus
           ></v-text-field>
+          </div>
+
           <!-- 비밀번호 1 -->
+          <div>
           <v-text-field
             color="green"
             dark
@@ -28,14 +34,16 @@
             type='password'
             required
           ></v-text-field>
-
-
+          </div>
+          <div>
           <v-btn class="mb-2"
             type="submit"
             background-color="yellow"
           >
           로그인
           </v-btn>
+          </div>
+        </div>
     </v-form>
   </div>
 </template>
@@ -76,16 +84,25 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
 label {
   font-size: 5rem;
 }
 
-.signupForm {
+.loginForm {
   width: 350px;
   height: 450px;
+}
 
+.loginArea {
+  margin-top : 5rem;
+}
+
+.innerbox {
+  height: 100%;
+  position: relative;
+  /* top: %; */
 }
 
 </style>
