@@ -94,7 +94,6 @@ export default {
 
   a {
     text-decoration: none;
-    color: pink
   }
 
   .navbar {

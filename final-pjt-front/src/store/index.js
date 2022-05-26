@@ -9,14 +9,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    apiKey: 'ac824af39d5e13e1310acc5a598278ab',
     trendingMovies: [],
     reviewMovies: [],
-    apiKey: 'ac824af39d5e13e1310acc5a598278ab',
     suggestedMovies: [],
-
   },
   getters: {
-    getApiKey:  state => state.apiKey
+    getApiKey: state => state.apiKey,
+    getSuggestedMovies: state => state.suggestedMovies
   },
   mutations: {
     CREATE_TRENDING_MOVIES: function (state, movies) {
@@ -25,6 +25,9 @@ export default new Vuex.Store({
     CREATE_REVIEW_MOVIES: function (state, movies) {
       state.reviewMovies = movies
     },
+    CREATE_SUGGESTED_MOVIES: function (state, movies) {
+      state.suggestedMovies = movies
+    }
   },
   actions: {
     create_trending_movies : function ({ commit }, movies) {
@@ -32,6 +35,9 @@ export default new Vuex.Store({
     },
     create_review_movies: function ({commit}, movies) {
       commit('CREATE_REVIEW_MOVIES', movies)
+    },
+    create_suggested_movies : function ({commit}, movies) {
+      commit('CREATE_SUGGESTED_MOVIES', movies)
     }
   },
   modules: {

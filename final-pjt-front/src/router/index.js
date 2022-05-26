@@ -103,6 +103,12 @@ const routes = [
     name: 'SuggestQueryView',
     component: SuggestQueryView,
   },
+  {
+    path: '/suggest/result',
+    name: 'SuggestedMoviesView',
+    component: SuggestedMoviesView,
+    props: true,
+  },
 
   // 
 

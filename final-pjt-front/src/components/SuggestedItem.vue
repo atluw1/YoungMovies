@@ -1,43 +1,33 @@
 <template>
-  <!-- <div class="col-12 col-sm-6 col-lg-3 my-3">
-    <v-hover v-slot="{ hover }">
-      <v-card :elevation="hover ? 24 : 2">
-          <a href="https://www.naver.com">
-            <v-img class="" :src="posterUrl" alt="영화 포스터">
-            </v-img>
-          </a>
-      </v-card>
-    </v-hover>
-  </div> -->
   <div
     v-show="IsPoster"
-    class="col-6 col-md-3 p-1"
+    class="col-6 col-md-3"
     @click="closeDialogMoveToDetail">
-  <div
-  class="movie-poster-wrap">
-    <img 
-      :src="posterUrl"
-      alt="poster" 
-      class="movie-poster"
-    >
-    <div class="movie-title m-1">
-      <p class="movie-title-text">
-        {{ movie.title }}
-      </p>
+    <div
+    class="d-flex align-items-center movie-poster-wrap">
+      <img 
+        :src="posterUrl"
+        alt="poster" 
+        class="movie-poster"
+      >
+      <div class="movie-title m-1">
+        <p class="movie-title-text">
+          {{ movie.title }}
+        </p>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MovieItem',
+  name: 'SuggestedItem',
   props: {
     movie: Object
   },
   data: function () {
     return {
-      posterUrl : `https://image.tmdb.org/t/p/w154/${this.movie.poster_path}`,
+      posterUrl : `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`,
       IsPoster: this.movie.poster_path
     }
   },
@@ -59,7 +49,7 @@ export default {
   cursor: pointer;
 }
 .movie-poster {
-  width: 100%;
+  width: 90%;
   height: auto;
   border-radius: 0.7rem;
   transition: all .2s ease-in-out; 
@@ -93,7 +83,7 @@ export default {
   transform: scale(1.1); 
 }
 .movie-title-text {
-  font-size: small;
+  font-size: large;
   position: absolute;
   bottom: 1rem;
   left: 0;

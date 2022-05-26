@@ -8,7 +8,7 @@
         </div>
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
           <h1 class="mb-3">추천 영화</h1>          
-          <TrendingCarousel/>
+          <SuggestedCarousel/>
         </div>
         <div class='col-12 col-xl-4 carousel-column d-flex flex-column justify-content-evenly align-items-center'>
           <h1 class="mb-3">평점 높은 영화</h1>
@@ -22,12 +22,14 @@
 <script>
   import TrendingCarousel from '@/components/TrendingCarousel.vue'
   import ReviewCarousel from '@/components/ReviewCarousel.vue'
+import SuggestedCarousel from '@/components/SuggestedCarousel.vue'
 
   export default {
     name: 'HomeView',
     components: {
     TrendingCarousel,
     ReviewCarousel,
+    SuggestedCarousel
 },
   }
 </script>
