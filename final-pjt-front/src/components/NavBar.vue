@@ -1,35 +1,43 @@
 <template>
-  <div class="navbar d-flex justify-content-md-between justify-content-center">
+  <div class="navbar d-flex justify-content-xl-between justify-content-evenly">
     
     <!-- navbar 왼쪽 -->
-    <div class="nav_column">
-        <div class="column_in_column">
+    <div v-show="!isLoggedIn" class="nav_column">
+        <div class="column_in_column mx-3">
           <router-link class="router_anchor" :to="{ name: 'LoginView' }">
             Login
           </router-link>
         </div>
-      <div class="column_in_column">
+      <div class="column_in_column me-3">
           <router-link class="router_anchor" :to="{ name: 'SignupView' }">
             Signup
           </router-link>        
       </div>
       <div class="column_in_column">
-          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
-            Hello, {{ currentUser.nickname }}
-          </router-link> 
+
       </div>  
-      <div class="column_in_column">
-          <router-link class="router_anchor" :to="{ name: 'LogoutView' }">
+    </div>
+        <!-- navbar 왼쪽 => 로그인 되었을 때 -->
+    <div v-show="isLoggedIn" class="nav_column">
+        <div class="column_in_column_logged_in">
+          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
+            Hello, <br>
+            {{ currentUser.username }}
+          </router-link> 
+        </div>
+      <div class="column_in_column_logged_in">
+          <router-link style="color:yellow; " class="router_anchor pe-5" :to="{ name: 'LogoutView' }">
             Logout
           </router-link>       
       </div>
+
     </div>
 
     <!-- navbar 중간 -->
-    <div class="d-none nav_column d-md-flex justify-content-center position-relative">
+    <div class="d-none nav_column d-lg-flex justify-content-center position-relative">
       <div class="position-absolute logo">
         <router-link :to="{ name: 'HomeView' }">
-          <img class="logo_image" src="@/images/logo1.png" alt="">
+          <img class="logo_image" src="@/images/logo2.png" alt="">
         </router-link>
       </div>
     </div>
@@ -43,20 +51,30 @@
       <!-- 두 번째 버튼 구역 -->
       <div class="column_in_column">
           <router-link class="router_anchor" :to="{ name: 'SuggestQueryView' }">
-            영화추천
+            <v-btn        
+              icon
+              x-large
+              href="https://lab.ssafy.com/bizyoung93/final-pjt"
+              color="green">
+              <v-icon>mdi-filmstrip
+              </v-icon>
+            </v-btn>            
           </router-link> 
       </div>
       <div class="column_in_column">
           <router-link class="router_anchor" :to="{ name: 'ReviewListView' }">
-            게시판
+            <v-btn        
+              icon
+              x-large
+              href="https://lab.ssafy.com/bizyoung93/final-pjt"
+              color="purple">
+              <v-icon>mdi-text-box-search-outline
+              </v-icon>
+            </v-btn> 
           </router-link> 
       </div>
       <!-- 세 번째 버튼 구역 -->
-      <div class="column_in_column">
-          <router-link class="router_anchor" :to="{ name: 'MyPageView', params:{ username: currentUser.username }}">
-            MyPage
-          </router-link> 
-      </div>
+
     </div>
   </div>
 </template>
@@ -86,6 +104,10 @@ export default {
 
 <style scoped>
 
+  * {
+    color: white;
+  }
+
   h1 {
     line-height: 100%;
     margin-bottom: 0;
@@ -95,6 +117,9 @@ export default {
     text-decoration: none;
   }
 
+
+
+
   .navbar {
     /* 네비게이션 바 자체의 색을 조절 */
     background-color: rgba(0, 0, 0, 0.8);
@@ -102,10 +127,11 @@ export default {
 
     height: 5rem;
     width: 70vw;
-    border-radius: 3px;
+    border-radius: 20px;
   } 
 
 
+/* logo area 관련 속성은 App.vue에 있음 */
 
   /* 로고 자체의 속성 */
   .logo {
@@ -115,7 +141,7 @@ export default {
   }
 
   .logo_image {
-    width: 500px;
+    width: 390px;
   }
 
 
@@ -128,9 +154,18 @@ export default {
   .column_in_column {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
+
+    .column_in_column_logged_in {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
 
   .router_anchor {
   color: #E91E48;
+  
 }
 </style>

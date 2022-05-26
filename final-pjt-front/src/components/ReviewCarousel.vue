@@ -47,10 +47,10 @@ export default {
 }
 
 
-</script >
+</script>
 
 
-<style>
+<style scoped>
 .carousel_div {
   width: 80%;
   height: auto;
@@ -71,7 +71,9 @@ export default {
   right: 0;
   bottom: 0;
   border-radius: 4px;
-  background: linear-gradient(120deg, #00F260, #0575E6, #00F260);
+  /* background: linear-gradient(120deg, #00f2ea, #2705e6, #00a5f2); */
+  background: linear-gradient(120deg, #f20000, #e5f104, #2400f2);
+
   background-size: 300% 300%;
   clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
 }
@@ -111,7 +113,6 @@ export default {
   }
 }
 
-/* 여기서부터 무지개 */
 
 
 </style>

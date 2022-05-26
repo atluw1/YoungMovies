@@ -17,9 +17,28 @@
           </main>
       </div>
     </v-app>
-    <div style='color:black;' class="bottom_pading">
-      .
-    </div>
+    <!-- <div style='color:black;' class="bottom_pading"> -->
+
+    <!-- </div> -->
+    <footer class="d-flex justify-content-center align-items-center footer">
+      <div style="position:fixed; right: 20px; bottom:20px;">
+        <v-btn        
+          icon
+          x-large
+          color="#E91E48"
+          href="#">
+          <v-icon>mdi-chevron-up-circle</v-icon>
+        </v-btn>
+      </div>      
+        <v-btn        
+          icon
+          x-large
+          href="https://lab.ssafy.com/bizyoung93/final-pjt"
+          color="#CFCFCF">
+          <v-icon>mdi-gitlab</v-icon>
+        </v-btn>      
+      2022 - Team Vincenzo
+    </footer>
   </div>
 </template>
 
@@ -75,7 +94,7 @@ body {
 }
 
 .logo_area {
-  height: 5vh;
+  height: 11vh;
 }
 
 @font-face {
@@ -119,6 +138,7 @@ body {
 
 /* 이제 바뀔 메인 페이지가 들어 갈 곳이다. */
 .main_area {
+  position:relative;
   width: 70vw;
   /* background-color: white; */
   height: 60vh;
@@ -127,6 +147,12 @@ body {
 .bottom_padding {
   height:15vh;
   width: auto;
+}
+
+.footer {
+  position:relative;
+  height: 10vh;
+  bottom: -25vh;
 }
 
 </style>

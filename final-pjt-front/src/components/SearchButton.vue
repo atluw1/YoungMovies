@@ -11,7 +11,7 @@
           <v-btn
             icon
             x-large
-            color="pink"
+            color="blue"
             v-bind="attrs"
             v-on="on"
           >
