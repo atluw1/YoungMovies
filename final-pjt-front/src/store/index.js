@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiKey: 'ac824af39d5e13e1310acc5a598278ab',
+    apiKey: process.env.VUE_APP_API,
     trendingMovies: [],
     reviewMovies: [],
     suggestedMovies: [],
