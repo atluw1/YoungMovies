@@ -8,8 +8,7 @@
 
 
 
-## :man_technologist: Team Sort
-
+## :man_technologist: Team
 **김현영**
 
 - BackEnd
